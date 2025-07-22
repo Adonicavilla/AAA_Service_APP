@@ -10,8 +10,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #ffc1cc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -20,6 +20,10 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #ffffff;
+}
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
 }
 .navbar .nav-links a {
   margin-left: 15px;
@@ -31,6 +35,10 @@ body {
 .navbar .nav-links a:hover {
   color: #ff9999;
 }
+.navbar .search-bar {
+  display: flex;
+  align-items: center;
+}
 .navbar .search-bar input {
   padding: 8px;
   width: 200px;
@@ -38,6 +46,18 @@ body {
   border-radius: 4px;
   background-color: #ffffff;
   color: #333;
+}
+.navbar .burger {
+  display: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.navbar .burger div {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 5px;
+  transition: all 0.3s ease;
 }
 .welcome {
   text-align: center;
@@ -74,7 +94,7 @@ body {
   transition: background-color 0.3s;
 }
 .welcome .search-button:hover {
-  background-color: #ffc1cc;
+  background-color: #000000;
 }
 .services-section {
   padding: 20px;
@@ -145,12 +165,15 @@ body {
   transition: background-color 0.3s;
 }
 .services-section .service-item .action-btn:hover {
-  background-color: #ffc1cc;
+  background-color: #000000;
 }
 .services-section .view-all {
   color: #ff9999;
   text-decoration: none;
   float: right;
+}
+.services-section .view-all:hover {
+  color: #000000;
 }
 .register {
   padding: 20px;
@@ -162,6 +185,9 @@ body {
   color: #ff9999;
   text-decoration: none;
 }
+.register a:hover {
+  color: #000000;
+}
 #map {
   height: 50vh;
   width: 100%;
@@ -171,17 +197,36 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 10px;
   }
   .navbar .logo {
     margin-bottom: 10px;
   }
   .navbar .nav-links {
-    margin-bottom: 10px;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #000000;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    padding: 10px;
+  }
+  .navbar .nav-links.active {
+    display: flex;
   }
   .navbar .nav-links a {
-    margin: 0 10px;
+    margin: 10px 0;
+    text-align: right;
+  }
+  .navbar .search-bar {
+    order: 2;
+    margin-left: auto;
+  }
+  .navbar .burger {
+    display: block;
+    order: 3;
   }
   .navbar .search-bar input {
     width: 100%;
@@ -205,7 +250,9 @@ body {
 @media (max-width: 480px) {
   .navbar .nav-links a {
     font-size: 12px;
-    margin: 0 5px;
+  }
+  .navbar .search-bar input {
+    width: 150px;
   }
   .welcome h1 {
     font-size: 28px;
@@ -220,4 +267,17 @@ body {
     width: 100%;
     padding: 15px;
   }
+}
+
+/* Burger Animation */
+.burger.active .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+  background-color: #ff9999;
+}
+.burger.active .line2 {
+  opacity: 0;
+}
+.burger.active .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+  background-color: #ff9999;
 }

@@ -6,22 +6,28 @@
     <title>OmniServe - All Services</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
     <div class="navbar">
         <div class="logo">OmniServe</div>
+        <div class="search-bar">
+            <input type="text" id="global-search" placeholder="Search delivery services...">
+        </div>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
         <div class="nav-links">
-            <a href="#food-delivery">Food Delivery</a>
-            <a href="#pet-shop">Pet Shop Inquiry</a>
-            <a href="#travel-agency">Travel Agency Inquiry</a>
+            <a href="index.html">Home</a>
+            <a href="/delivery.html">Food Delivery</a>
+            <a href="index.html#pet-shop">Directory</a>
             <a href="https://example.com/register" target="_blank">Register Business</a>
             <a href="https://example.com/account" target="_blank">Account</a>
         </div>
-        <div class="search-bar">
-            <input type="text" id="global-search" placeholder="Search services...">
-        </div>
     </div>
+
 
     <div class="welcome" id="welcome">
         <h1>Welcome to OmniServe</h1>
@@ -89,6 +95,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    <script src="main.js"></script>
+    <script src="/src/main.js"></script>
 </body>
 </html>

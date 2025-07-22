@@ -7,11 +7,11 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// Add sample pins
+// Add sample pins for delivery services
 const sampleLocations = [
-  { lat: 14.8433, lng: 120.8114, name: "Sample Restaurant" },
-  { lat: 14.85, lng: 120.82, name: "Sample Pet Shop" },
-  { lat: 14.84, lng: 120.8, name: "Sample Travel Agency" },
+  { lat: 14.8433, lng: 120.8114, name: "Pizza Palace" },
+  { lat: 14.85, lng: 120.82, name: "Sushi Central" },
+  { lat: 14.84, lng: 120.8, name: "Quick Courier" },
 ];
 sampleLocations.forEach((loc) => {
   L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(loc.name).openPopup();
@@ -43,6 +43,18 @@ function showRoute(start, end) {
   });
 }
 
+// Add click event for action buttons to show route
+document.querySelectorAll(".action-btn").forEach((button) => {
+  button.addEventListener("click", function (e) {
+    if (e.target === this) {
+      // Only trigger route if not clicking the link
+      const lat = parseFloat(this.getAttribute("data-lat"));
+      const lng = parseFloat(this.getAttribute("data-lng"));
+      showRoute([14.8433, 120.8114], [lat, lng]);
+    }
+  });
+});
+
 // Smooth scroll for internal links
 document.querySelectorAll(".navbar .nav-links a").forEach((anchor) => {
   if (anchor.getAttribute("href").startsWith("#")) {
@@ -51,8 +63,17 @@ document.querySelectorAll(".navbar .nav-links a").forEach((anchor) => {
       document.querySelector(this.getAttribute("href")).scrollIntoView({
         behavior: "smooth",
       });
+      // Close burger menu on link click
+      document.querySelector(".nav-links").classList.remove("active");
+      document.querySelector(".burger").classList.remove("active");
     });
   }
+});
+
+// Burger menu toggle
+document.querySelector(".burger").addEventListener("click", () => {
+  document.querySelector(".nav-links").classList.toggle("active");
+  document.querySelector(".burger").classList.toggle("active");
 });
 
 // Search functionality
@@ -98,6 +119,9 @@ globalSearch.addEventListener("keypress", (e) => {
         .querySelectorAll(".service-item")
         .forEach((item) => item.classList.remove("hidden"));
     }
+    // Close burger menu on search
+    document.querySelector(".nav-links").classList.remove("active");
+    document.querySelector(".burger").classList.remove("active");
   }
 });
 
