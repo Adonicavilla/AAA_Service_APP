@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaServeX - Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <span>AlaServeX</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="delivery.html">Food Delivery</a>
+                <a href="directory.html">Directory</a>
+                <a href="map.html">Map</a>
+                <a href="account.html">Account</a>
+            </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Search..." class="search-input">
+                <button class="icon-button"><i data-lucide="search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main id="map-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Map of Malolos, Bulacan</h1>
+                <p class="page-subtitle">Explore an interactive map featuring various points of interest.</p>
+            </div>
+            <div class="map-container-wrapper">
+                <div class="map-search-bar">
+                    <input type="search" id="map-search-input" placeholder="Search for a location or category..." class="search-input large">
+                    <button id="map-search-button" class="button primary large"><i data-lucide="search"></i></button>
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AlaServeX. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

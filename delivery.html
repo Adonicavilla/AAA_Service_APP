@@ -3,77 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery - OmniServe</title>
+    <title>AlaServeX - Food Delivery</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <header>
+
+    <header class="header">
         <div class="container">
-            <div class="logo">
-                <a href="home.html">OmniServe</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="directory.html">Directory</a></li>
-                    <li><a href="map.html">Map</a></li>
-                    <li><a href="delivery.html">Food Delivery</a></li>
-                    <li><a href="account.html">Account</a></li>
-                </ul>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <span>AlaServeX</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="delivery.html">Food Delivery</a>
+                <a href="directory.html">Directory</a>
+                <a href="map.html">Map</a>
+                <a href="account.html">Account</a>
             </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Search..." class="search-input">
+                <button class="icon-button"><i data-lucide="search"></i></button>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="page-title">
-            <h1>Food Delivery</h1>
-            <p>Discover delicious meals from your favorite local restaurants.</p>
-             <div class="search-bar">
-                <input type="text" placeholder="Search restaurants or cuisines...">
-                <button>Search</button>
+    <main id="delivery-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Order Food Delivery</h1>
+                <p class="page-subtitle">Discover delicious meals from your favorite local restaurants.</p>
+                <div class="search-bar-container">
+                     <input type="search" placeholder="Search restaurants or cuisines..." class="search-input large">
+                     <button class="button primary large"><i data-lucide="search"></i></button>
+                </div>
             </div>
-        </section>
 
-        <section class="delivery-list">
-            <div class="card-grid full-grid">
+            <div class="card-grid">
+                <!-- Restaurant Card 1 -->
                 <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Pizza Palace" data-ai-hint="pizza italian">
+                    <div class="card-image-container">
+                        <img src="https://placehold.co/600x400.png" alt="Pizza Palace">
+                        <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.5</span>
+                    </div>
                     <div class="card-content">
-                        <h3>Pizza Palace</h3>
-                        <span class="badge">Italian</span>
-                        <p>25-35 min &bull; $$</p>
+                        <h3 class="card-title">Pizza Palace</h3>
+                        <span class="badge outline">Italian</span>
+                        <p class="card-description">25-35 min &bull; $$</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="button primary full-width">Order Now</a>
                     </div>
                 </div>
+                <!-- Restaurant Card 2 -->
                 <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Sushi Central" data-ai-hint="sushi japanese">
+                    <div class="card-image-container">
+                        <img src="https://placehold.co/600x400.png" alt="Sushi Central">
+                        <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.8</span>
+                    </div>
                     <div class="card-content">
-                        <h3>Sushi Central</h3>
-                        <span class="badge">Japanese</span>
-                        <p>30-40 min &bull; $$$</p>
+                        <h3 class="card-title">Sushi Central</h3>
+                        <span class="badge outline">Japanese</span>
+                        <p class="card-description">30-40 min &bull; $$$</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="button primary full-width">Order Now</a>
                     </div>
                 </div>
+                 <!-- Restaurant Card 3 -->
                 <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Burger Barn" data-ai-hint="burger american">
+                    <div class="card-image-container">
+                        <img src="https://placehold.co/600x400.png" alt="Burger Barn">
+                        <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.2</span>
+                    </div>
                     <div class="card-content">
-                        <h3>Burger Barn</h3>
-                        <span class="badge">American</span>
-                        <p>20-30 min &bull; $</p>
+                        <h3 class="card-title">Burger Barn</h3>
+                        <span class="badge outline">American</span>
+                        <p class="card-description">20-30 min &bull; $</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="button primary full-width">Order Now</a>
                     </div>
                 </div>
+                <!-- Restaurant Card 4 -->
                 <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Taco Town" data-ai-hint="taco mexican">
+                    <div class="card-image-container">
+                        <img src="https://placehold.co/600x400.png" alt="Taco Town">
+                        <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.6</span>
+                    </div>
                     <div class="card-content">
-                        <h3>Taco Town</h3>
-                        <span class="badge">Mexican</span>
-                        <p>25-35 min &bull; $$</p>
+                        <h3 class="card-title">Taco Town</h3>
+                        <span class="badge outline">Mexican</span>
+                        <p class="card-description">25-35 min &bull; $$</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="button primary full-width">Order Now</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2024 OmniServe. All rights reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AlaServeX. All rights reserved.</p>
+        </div>
     </footer>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

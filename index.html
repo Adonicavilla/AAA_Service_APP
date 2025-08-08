@@ -3,99 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniServe - Home</title>
+    <title>AlaServeX - Home</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <header>
+
+    <header class="header">
         <div class="container">
-            <div class="logo">
-                <a href="home.html">OmniServe</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="directory.html">Directory</a></li>
-                    <li><a href="map.html">Map</a></li>
-                    <li><a href="delivery.html">Food Delivery</a></li>
-                    <li><a href="account.html">Account</a></li>
-                </ul>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <span>AlaServeX</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="delivery.html">Food Delivery</a>
+                <a href="directory.html">Directory</a>
+                <a href="map.html">Map</a>
+                <a href="account.html">Account</a>
             </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Search..." class="search-input">
+                <button class="icon-button"><i data-lucide="search"></i></button>
+            </div>
         </div>
     </header>
 
-    <main class="container">
+    <main id="home-page">
         <section class="hero">
-            <h1>Welcome to OmniServe</h1>
-            <p>Your one-stop platform for food delivery, local business discovery, and much more.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for anything...">
-                <button>Search</button>
-            </div>
-        </section>
-
-        <section class="featured">
-            <h2>Featured Restaurants</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Pizza Palace" data-ai-hint="pizza italian">
-                    <div class="card-content">
-                        <h3>Pizza Palace</h3>
-                        <div class="badge-group">
-                           <span class="badge">Italian</span>
-                           <span class="badge rating">⭐ 4.5</span>
-                        </div>
-                        <p>25-35 min &bull; $$</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Sushi Central" data-ai-hint="sushi japanese">
-                    <div class="card-content">
-                        <h3>Sushi Central</h3>
-                        <div class="badge-group">
-                            <span class="badge">Japanese</span>
-                            <span class="badge rating">⭐ 4.8</span>
-                        </div>
-                        <p>30-40 min &bull; $$$</p>
-                    </div>
+            <div class="container text-center">
+                <h1 class="hero-title">Welcome to AlaServeX</h1>
+                <p class="hero-subtitle">Your one-stop platform for food delivery, local business discovery, and more.</p>
+                <div class="hero-search">
+                    <input type="search" placeholder="Search for services or businesses..." class="search-input large">
+                    <button class="button primary large"><i data-lucide="search"></i><span>Search</span></button>
                 </div>
             </div>
         </section>
 
-        <section class="featured">
-            <h2>Popular Services</h2>
-            <div class="card-grid">
-                 <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Pet Shop" data-ai-hint="pet animal">
-                    <div class="card-content">
-                        <h3>Paws & Claws Pet Shop</h3>
-                         <div class="badge-group">
-                           <span class="badge">Pet Shop</span>
-                           <span class="badge rating">⭐ 4.3</span>
-                        </div>
-                        <p>Your one-stop shop for all pet needs.</p>
-                    </div>
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Restaurants</h2>
+                    <a href="delivery.html" class="button-link">View All Restaurants &rarr;</a>
                 </div>
-                <div class="card">
-                    <img src="https://placehold.co/600x400.png" alt="Manejkom Travel & Tours" data-ai-hint="travel logo">
-                    <div class="card-content">
-                        <h3>Manejkom Travel & Tours</h3>
-                         <div class="badge-group">
-                           <span class="badge">Travel Agency</span>
-                            <span class="badge rating">⭐ 4.8</span>
+                <div class="card-grid">
+                    <!-- Restaurant Card 1 -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Pizza Palace">
+                            <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.5</span>
                         </div>
-                        <p>Plan your dream vacation with us.</p>
+                        <div class="card-content">
+                            <h3 class="card-title">Pizza Palace</h3>
+                            <span class="badge outline">Italian</span>
+                            <p class="card-description">25-35 min &bull; $$</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button primary full-width">Order Now</a>
+                        </div>
                     </div>
+                    <!-- Restaurant Card 2 -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Sushi Central">
+                            <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.8</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Sushi Central</h3>
+                            <span class="badge outline">Japanese</span>
+                            <p class="card-description">30-40 min &bull; $$$</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button primary full-width">Order Now</a>
+                        </div>
+                    </div>
+                     <!-- Restaurant Card 3 -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Burger Barn">
+                            <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.2</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Burger Barn</h3>
+                            <span class="badge outline">American</span>
+                            <p class="card-description">20-30 min &bull; $</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button primary full-width">Order Now</a>
+                        </div>
+                    </div>
+                    <!-- View More Card -->
+                    <a href="delivery.html" class="card-link">
+                        <div class="card view-more-card">
+                            <span class="view-more-icon">🍽️</span>
+                            <span class="view-more-text">Explore More Food</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Popular Services</h2>
+                    <a href="directory.html" class="button-link">Browse Directory &rarr;</a>
+                </div>
+                <div class="card-grid">
+                    <!-- Business Card 1 -->
+                    <div class="card">
+                         <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Pet Shop">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Paws & Claws Pet Shop</h3>
+                            <span class="badge outline">Pet Shop</span>
+                            <p class="card-description">Your one-stop shop for all pet needs. Food, toys, and accessories.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button secondary full-width">Visit Page</a>
+                        </div>
+                    </div>
+                    <!-- Business Card 2 -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Travel Agency">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Manejkom Travel & Tours</h3>
+                            <span class="badge outline">Travel Agency</span>
+                            <p class="card-description">Plan your dream vacation with our expert travel agents.</p>
+                        </div>
+                        <div class="card-footer">
+                             <a href="#" class="button secondary full-width">Visit Page</a>
+                        </div>
+                    </div>
+                     <!-- Business Card 3 -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Hardware Store">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Home Fix It Hardware</h3>
+                            <span class="badge outline">Hardware Store</span>
+                            <p class="card-description">Tools and supplies for all your home improvement projects.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button secondary full-width">Visit Page</a>
+                        </div>
+                    </div>
+                    <!-- View More Card -->
+                    <a href="directory.html" class="card-link">
+                        <div class="card view-more-card">
+                            <span class="view-more-icon">🛍️</span>
+                            <span class="view-more-text">Discover Businesses</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>
-        <p>&copy; 2024 OmniServe. All rights reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AlaServeX. All rights reserved.</p>
+        </div>
     </footer>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
