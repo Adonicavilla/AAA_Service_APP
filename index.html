@@ -3,98 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniServe - All Services</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <link rel="stylesheet" href="/src/style.css">
+    <title>OmniServe - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">OmniServe</div>
-        <div class="search-bar">
-            <input type="text" id="global-search" placeholder="Search delivery services...">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="home.html">OmniServe</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="directory.html">Directory</a></li>
+                    <li><a href="map.html">Map</a></li>
+                    <li><a href="delivery.html">Food Delivery</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="/delivery.html">Food Delivery</a>
-            <a href="index.html#pet-shop">Directory</a>
-            <a href="https://example.com/register" target="_blank">Register Business</a>
-            <a href="https://example.com/account" target="_blank">Account</a>
-        </div>
-    </div>
+    </header>
 
+    <main class="container">
+        <section class="hero">
+            <h1>Welcome to OmniServe</h1>
+            <p>Your one-stop platform for food delivery, local business discovery, and much more.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for anything...">
+                <button>Search</button>
+            </div>
+        </section>
 
-    <div class="welcome" id="welcome">
-        <h1>Welcome to OmniServe</h1>
-        <p>Your one-stop platform for food delivery, business inquiries, and more. Find everything you need, right at your fingertips.</p>
-        <input type="text" class="search-input" id="search-input" placeholder="Search for services or businesses...">
-        <button class="search-button" id="search-button">Search</button>
-    </div>
+        <section class="featured">
+            <h2>Featured Restaurants</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="https://placehold.co/600x400.png" alt="Pizza Palace" data-ai-hint="pizza italian">
+                    <div class="card-content">
+                        <h3>Pizza Palace</h3>
+                        <div class="badge-group">
+                           <span class="badge">Italian</span>
+                           <span class="badge rating">⭐ 4.5</span>
+                        </div>
+                        <p>25-35 min &bull; $$</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/600x400.png" alt="Sushi Central" data-ai-hint="sushi japanese">
+                    <div class="card-content">
+                        <h3>Sushi Central</h3>
+                        <div class="badge-group">
+                            <span class="badge">Japanese</span>
+                            <span class="badge rating">⭐ 4.8</span>
+                        </div>
+                        <p>30-40 min &bull; $$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div class="services-section" id="food-delivery">
-        <h2>Food Delivery</h2>
-        <div class="service-item" data-keywords="Pizza Palace Italian delivery 20-35 min $$">
-            <img src="https://via.placeholder.com/600x400" alt="Pizza Palace">
-            <div class="rating">★ 4.5</div>
-            <div class="category">Italian</div>
-            <div class="details">20-35 min • $$</div>
-            <div class="directions">Directions: Head north on McArthur Hwy, turn left onto Paseo del Congreso, arrive at Pizza Palace in 5 min.</div>
-            <div class="tracking">Tracking: Order #1234 - Out for Delivery, ETA 6:00 PM PST</div>
-            <button class="action-btn" onclick="window.open('https://example.com/pizza', '_blank')">Order or View Details</button>
-        </div>
-        <div class="service-item" data-keywords="Sushi Central Japanese delivery 30-40 min $$$">
-            <img src="https://via.placeholder.com/600x400" alt="Sushi Central">
-            <div class="rating">★ 4.8</div>
-            <div class="category">Japanese</div>
-            <div class="details">30-40 min • $$$</div>
-            <div class="directions">Directions: Take McArthur Hwy south, turn right onto J.P. Rizal St, Sushi Central is on your left in 7 min.</div>
-            <div class="tracking">Tracking: Order #5678 - Preparing, ETA 6:15 PM PST</div>
-            <button class="action-btn" onclick="window.open('https://example.com/sushi', '_blank')">Order or View Details</button>
-        </div>
-        <a href="#" class="view-all">View All Food</a>
-    </div>
+        <section class="featured">
+            <h2>Popular Services</h2>
+            <div class="card-grid">
+                 <div class="card">
+                    <img src="https://placehold.co/600x400.png" alt="Pet Shop" data-ai-hint="pet animal">
+                    <div class="card-content">
+                        <h3>Paws & Claws Pet Shop</h3>
+                         <div class="badge-group">
+                           <span class="badge">Pet Shop</span>
+                           <span class="badge rating">⭐ 4.3</span>
+                        </div>
+                        <p>Your one-stop shop for all pet needs.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/600x400.png" alt="Manejkom Travel & Tours" data-ai-hint="travel logo">
+                    <div class="card-content">
+                        <h3>Manejkom Travel & Tours</h3>
+                         <div class="badge-group">
+                           <span class="badge">Travel Agency</span>
+                            <span class="badge rating">⭐ 4.8</span>
+                        </div>
+                        <p>Plan your dream vacation with us.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <div class="services-section" id="pet-shop">
-        <h2>Pet Shop Inquiry</h2>
-        <div class="service-item" data-keywords="Pet Shop Pet Services inquiry">
-            <img src="https://via.placeholder.com/600x400" alt="Pet Shop">
-            <div class="rating">★ 4.2</div>
-            <div class="category">Pet Services</div>
-            <div class="details">Inquiry Only</div>
-            <div class="directions">Directions: Go east on Paseo del Congreso, turn right onto M.H. del Pilar St, Pet Shop is 4 min away.</div>
-            <div class="tracking">Tracking: N/A</div>
-            <button class="action-btn" onclick="window.open('https://example.com/petshop-inquiry', '_blank')">Order or View Details</button>
-        </div>
-        <a href="#" class="view-all">View All Pet Shops</a>
-    </div>
-
-    <div class="services-section" id="travel-agency">
-        <h2>Travel Agency Inquiry</h2>
-        <div class="service-item" data-keywords="Travel Agency Travel inquiry">
-            <img src="https://via.placeholder.com/600x400" alt="Travel Agency">
-            <div class="rating">★ 4.6</div>
-            <div class="category">Travel</div>
-            <div class="details">Inquiry Only</div>
-            <div class="directions">Directions: Head west on J.P. Rizal St, turn left onto Sto. Niño St, Travel Agency is 6 min away.</div>
-            <div class="tracking">Tracking: N/A</div>
-            <button class="action-btn" onclick="window.open('https://example.com/travel-inquiry', '_blank')">Order or View Details</button>
-        </div>
-        <a href="#" class="view-all">View All Travel Agencies</a>
-    </div>
-
-    <div class="register">
-        <p>Any business can join! <a href="#">Register your business here</a></p>
-    </div>
-
-    <div id="map"></div>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    <script src="/src/main.js"></script>
+    <footer>
+        <p>&copy; 2024 OmniServe. All rights reserved.</p>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="main.js"></script>
 </body>
 </html>
