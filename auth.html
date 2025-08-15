@@ -4,164 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AAA Service - Authentication</title>
-    <style>
-        :root {
-            --primary-pink: #FF69B4;
-            --primary-pink-dark: #FF1493;
-            --secondary-blue: #4169E1;
-            --secondary-blue-dark: #0000CD;
-            --gray-primary: #708090;
-            --white: #FFFFFF;
-            --off-white: #F8F9FA;
-            --font-elegant: 'Playfair Display', serif;
-            --font-modern: 'Inter', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-modern);
-            background: linear-gradient(135deg, #FFB6C1 0%, #87CEEB 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .auth-container {
-            background: var(--white);
-            border-radius: 1rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
-            padding: 3rem;
-        }
-
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .auth-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-pink);
-            font-family: var(--font-elegant);
-        }
-
-        .tagline {
-            color: var(--gray-primary);
-            font-size: 1.1rem;
-            font-style: italic;
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #E9ECEF;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            cursor: pointer;
-            color: var(--gray-primary);
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            color: var(--primary-pink);
-            border-bottom: 2px solid var(--primary-pink);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--gray-primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #E9ECEF;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-pink);
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary-pink), var(--primary-pink-dark));
-            color: var(--white);
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-        }
-
-        .form-footer {
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--gray-primary);
-        }
-
-        .form-footer a {
-            color: var(--secondary-blue);
-            text-decoration: none;
-        }
-
-        .driver-fields {
-            background: var(--off-white);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .auth-container {
-                margin: 1rem;
-                padding: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="auth-page">
     <div class="auth-container">
         <div class="auth-header">
-            <h1>AAA Service</h1>
+            <h1>ServeX</h1>
             <p class="tagline">Premium Transportation Services</p>
         </div>
         
@@ -176,15 +26,15 @@
                 <h2>Welcome Back</h2>
                 <div class="form-group">
                     <label for="signin-email">Email Address</label>
-                    <input type="email" id="signin-email" required placeholder="your.email@example.com">
+                    <input type="email" id="signin-email" class="form-input" required placeholder="your.email@example.com">
                 </div>
                 <div class="form-group">
                     <label for="signin-password">Password</label>
-                    <input type="password" id="signin-password" required placeholder="••••••••">
+                    <input type="password" id="signin-password" class="form-input" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn-primary">Sign In</button>
+                <button type="submit" class="button primary full-width">Sign In</button>
                 <p class="form-footer">
-                    <a href="#" class="forgot-link">Forgot password?</a>
+                    <a href="#" class="button-link">Forgot password?</a>
                 </p>
             </form>
 
@@ -193,23 +43,23 @@
                 <h2>Create Account</h2>
                 <div class="form-group">
                     <label for="signup-fullname">Full Name</label>
-                    <input type="text" id="signup-fullname" required placeholder="John Doe">
+                    <input type="text" id="signup-fullname" class="form-input" required placeholder="John Doe">
                 </div>
                 <div class="form-group">
                     <label for="signup-phone">Phone Number</label>
-                    <input type="tel" id="signup-phone" required placeholder="+1 (555) 123-4567">
+                    <input type="tel" id="signup-phone" class="form-input" required placeholder="+1 (555) 123-4567">
                 </div>
                 <div class="form-group">
                     <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" required placeholder="your.email@example.com">
+                    <input type="email" id="signup-email" class="form-input" required placeholder="your.email@example.com">
                 </div>
                 <div class="form-group">
                     <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" required placeholder="Create a strong password">
+                    <input type="password" id="signup-password" class="form-input" required placeholder="Create a strong password">
                 </div>
                 <div class="form-group">
                     <label for="signup-user-type">I am a:</label>
-                    <select id="signup-user-type" required>
+                    <select id="signup-user-type" class="form-input" required>
                         <option value="customer">Customer</option>
                         <option value="driver">Driver</option>
                     </select>
@@ -217,11 +67,11 @@
                 <div id="driver-fields" class="driver-fields" style="display: none;">
                     <div class="form-group">
                         <label for="license-number">Driver's License Number</label>
-                        <input type="text" id="license-number" placeholder="DL123456789">
+                        <input type="text" id="license-number" class="form-input" placeholder="DL123456789">
                     </div>
                     <div class="form-group">
                         <label for="vehicle-type">Vehicle Type</label>
-                        <select id="vehicle-type">
+                        <select id="vehicle-type" class="form-input">
                             <option value="sedan">Sedan</option>
                             <option value="suv">SUV</option>
                             <option value="van">Van</option>
@@ -230,85 +80,118 @@
                     </div>
                     <div class="form-group">
                         <label for="vehicle-model">Vehicle Model</label>
-                        <input type="text" id="vehicle-model" placeholder="Toyota Camry 2023">
+                        <input type="text" id="vehicle-model" class="form-input" placeholder="Toyota Camry 2023">
                     </div>
                 </div>
-                <button type="submit" class="btn-primary">Create Account</button>
+                <button type="submit" class="button primary full-width">Create Account</button>
                 <p class="form-footer">
-                    Already have an account? <a href="#" onclick="showTab('signin')">Sign In</a>
+                    Already have an account? <a href="#" class="button-link" onclick="showTab('signin')">Sign In</a>
                 </p>
             </form>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/lucide.umd.js" defer></script>
     <script>
-        function showTab(tabName) {
-            document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(`${tabName}-form`).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        document.getElementById('signup-user-type').addEventListener('change', function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            const signinForm = document.getElementById('signin-form');
+            const signupForm = document.getElementById('signup-form');
+            const userTypeSelect = document.getElementById('signup-user-type');
             const driverFields = document.getElementById('driver-fields');
-            driverFields.style.display = this.value === 'driver' ? 'block' : 'none';
-        });
+            const tabButtons = document.querySelectorAll('.tab-btn');
 
-        // Form submission handlers
-        document.getElementById('signin-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('signin-email').value;
-            const password = document.getElementById('signin-password').value;
-            
-            // Handle sign in logic
-            console.log('Signing in:', { email });
-            
-            // Store user data in localStorage (in real app, this would come from API)
-            const mockUser = {
-                fullname: email.split('@')[0], // Mock name from email
-                email: email,
-                isAuthenticated: true
-            };
-            localStorage.setItem('userData', JSON.stringify(mockUser));
-            
-            window.location.href = 'index.html';
-        });
+            // Function to switch between Sign In and Sign Up tabs
+            // Make it global so inline onclick can find it
+            window.showTab = function(tabName) {
+                // Switch active tab button
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                const activeBtn = Array.from(tabButtons).find(btn => btn.getAttribute('onclick') === `showTab('${tabName}')`);
+                if(activeBtn) activeBtn.classList.add('active');
 
-        document.getElementById('signup-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = {
-                fullname: document.getElementById('signup-fullname').value,
-                email: document.getElementById('signup-email').value,
-                phone: document.getElementById('signup-phone').value,
-                password: document.getElementById('signup-password').value,
-                userType: document.getElementById('signup-user-type').value,
-                licenseNumber: document.getElementById('license-number')?.value,
-                vehicleType: document.getElementById('vehicle-type')?.value,
-                vehicleModel: document.getElementById('vehicle-model')?.value
-            };
-            
-            // Handle sign up logic
-            console.log('Creating account:', formData);
-            
-            // Store user data in localStorage
-            const userData = {
-                fullname: formData.fullname,
-                email: formData.email,
-                phone: formData.phone,
-                userType: formData.userType,
-                isAuthenticated: true
-            };
-            localStorage.setItem('userData', JSON.stringify(userData));
-            
-            window.location.href = 'index.html';
-        });
+                // Switch active form
+                if (tabName === 'signin') {
+                    signinForm.classList.add('active');
+                    signupForm.classList.remove('active');
+                } else {
+                    signinForm.classList.remove('active');
+                    signupForm.classList.add('active');
+                }
+            }
 
-        // Check if user is already authenticated
-        window.addEventListener('DOMContentLoaded', () => {
-            const userData = localStorage.getItem('userData');
-            if (userData && JSON.parse(userData).isAuthenticated) {
-                window.location.href = 'index.html';
+            // Show/hide driver-specific fields on user type change
+            if (userTypeSelect) {
+                userTypeSelect.addEventListener('change', () => {
+                    if (userTypeSelect.value === 'driver') {
+                        driverFields.style.display = 'block';
+                    } else {
+                        driverFields.style.display = 'none';
+                    }
+                });
+            }
+
+            // Handle Sign-in form submission
+            if (signinForm) {
+                signinForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('signin-email').value;
+                    const password = document.getElementById('signin-password').value;
+
+                    // Mock Authentication: Check if user exists in localStorage
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const user = users.find(u => u.email === email && u.password === password);
+
+                    if (user) {
+                        localStorage.setItem('userData', JSON.stringify({
+                            isAuthenticated: true,
+                            name: user.fullName,
+                            email: user.email,
+                            userType: user.userType
+                        }));
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Invalid email or password. Please sign up if you do not have an account.');
+                    }
+                });
+            }
+
+            // Handle Sign-up form submission
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const fullName = document.getElementById('signup-fullname').value;
+                    const phone = document.getElementById('signup-phone').value;
+                    const email = document.getElementById('signup-email').value;
+                    const password = document.getElementById('signup-password').value;
+                    const userType = document.getElementById('signup-user-type').value;
+
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+                    if (users.find(u => u.email === email)) {
+                        alert('An account with this email already exists. Please sign in.');
+                        return;
+                    }
+
+                    const newUser = { fullName, phone, email, password, userType };
+
+                    if (userType === 'driver') {
+                        newUser.licenseNumber = document.getElementById('license-number').value;
+                        newUser.vehicleType = document.getElementById('vehicle-type').value;
+                        newUser.vehicleModel = document.getElementById('vehicle-model').value;
+                    }
+
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    localStorage.setItem('userData', JSON.stringify({
+                        isAuthenticated: true,
+                        name: newUser.fullName,
+                        email: newUser.email,
+                        userType: newUser.userType
+                    }));
+
+                    alert('Account created successfully! Welcome.');
+                    window.location.href = 'index.html';
+                });
             }
         });
     </script>

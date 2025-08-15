@@ -19,6 +19,7 @@ body {
     color: var(--text-color);
     margin: 0;
     line-height: 1.6;
+}
 
 
 h1, h2, h3, h4, h5, h6 {
@@ -120,7 +121,7 @@ img {
 
 /*======== BUTTONS & FORMS ===========*/
 .button {
-    display: inline-flex;
+    display: inline;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
@@ -386,33 +387,76 @@ img {
 
 /*======== HOME ===========*/
 .hero {
-    background-color: var(--primary-color-dark);
+    background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--white-color);
-    padding: 4rem 0;
+    padding: 6rem 0;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
 .hero-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: var(--white-color);
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
+
 .hero-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    opacity: 0.95;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 .hero-search {
     max-width: 700px;
     margin: 0 auto;
     display: flex;
     gap: 0.5rem;
+    justify-content: center;
 }
 .hero-search .search-input {
     flex-grow: 1;
     text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 .search-input.large {
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.hero-search .button {
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .featured-section {
@@ -522,4 +566,105 @@ img {
 }
 .order-item-status {
     font-weight: 500;
+}
+
+/*======== AUTHENTICATION ===========*/
+/* Auth-specific styles */
+:root {
+    --primary-pink: #FF69B4;
+    --primary-pink-dark: #FF1493;
+    --secondary-blue: #4169E1;
+    --secondary-blue-dark: #0000CD;
+    --gray-primary: #708090;
+    --white: #FFFFFF;
+    --off-white: #F8F9FA;
+    --font-elegant: 'Playfair Display', serif;
+    --font-modern: 'Inter', sans-serif;
+}
+
+body.auth-page {
+    background: linear-gradient(135deg, #FFB6C1 0%, #87CEEB 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-family: var(--font-modern);
+}
+
+.auth-container {
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+    padding: 3rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-pink);
+    font-family: var(--font-elegant);
+}
+
+.tagline {
+    color: var(--gray-primary);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #E9ECEF;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--gray-primary);
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--primary-pink);
+    border-bottom: 2px solid var(--primary-pink);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.driver-fields {
+    background: var(--off-white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--gray-primary);
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 1rem;
+        padding: 2rem;
+    }
 }
