@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlaServeX - Home</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -16,6 +18,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 <span>AlaServeX</span>
             </a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
             <nav class="main-nav">
                 <a href="index.html">Home</a>
                 <a href="delivery.html">Food Delivery</a>
@@ -23,10 +28,6 @@
                 <a href="map.html">Map</a>
                 <a href="account.html">Account</a>
             </nav>
-            <div class="header-actions">
-                <input type="search" placeholder="Search..." class="search-input">
-                <button class="icon-button"><i data-lucide="search"></i></button>
-            </div>
         </div>
     </header>
 
@@ -59,9 +60,11 @@
                             <h3 class="card-title">Pizza Palace</h3>
                             <span class="badge outline">Italian</span>
                             <p class="card-description">25-35 min &bull; $$</p>
+                            <p class="card-location"><i data-lucide="map-pin" class="icon-sm"></i> 123 Main St, Downtown</p>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="button primary full-width">Order Now</a>
+                            <a href="map.html?location=pizza-palace" class="button secondary full-width">View on Map</a>
                         </div>
                     </div>
                     <!-- Restaurant Card 2 -->
@@ -74,12 +77,14 @@
                             <h3 class="card-title">Sushi Central</h3>
                             <span class="badge outline">Japanese</span>
                             <p class="card-description">30-40 min &bull; $$$</p>
+                            <p class="card-location"><i data-lucide="map-pin" class="icon-sm"></i> 456 Ocean Ave, Waterfront</p>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="button primary full-width">Order Now</a>
+                            <a href="map.html?location=sushi-central" class="button secondary full-width">View on Map</a>
                         </div>
                     </div>
-                     <!-- Restaurant Card 3 -->
+                    <!-- Restaurant Card 3 (from home.html) -->
                     <div class="card">
                         <div class="card-image-container">
                             <img src="https://placehold.co/600x400.png" alt="Burger Barn">
@@ -89,9 +94,45 @@
                             <h3 class="card-title">Burger Barn</h3>
                             <span class="badge outline">American</span>
                             <p class="card-description">20-30 min &bull; $</p>
+                            <p class="card-location"><i data-lucide="map-pin" class="icon-sm"></i> 789 Park Blvd, Midtown</p>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="button primary full-width">Order Now</a>
+                            <a href="map.html?location=burger-barn" class="button secondary full-width">View on Map</a>
+                        </div>
+                    </div>
+                    <!-- Service Card 1 (from home.html) -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Pet Shop">
+                            <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.3</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Paws & Claws Pet Shop</h3>
+                            <span class="badge outline">Pet Shop</span>
+                            <p class="card-description">Your one-stop shop for all pet needs.</p>
+                            <p class="card-location"><i data-lucide="map-pin" class="icon-sm"></i> 321 Pet Lane, Shopping District</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button secondary full-width">Visit Page</a>
+                            <a href="map.html?location=paws-claws" class="button secondary full-width">View on Map</a>
+                        </div>
+                    </div>
+                    <!-- Service Card 2 (from home.html) -->
+                    <div class="card">
+                        <div class="card-image-container">
+                            <img src="https://placehold.co/600x400.png" alt="Travel Agency">
+                            <span class="badge top-right"><i data-lucide="star" class="icon-filled"></i> 4.8</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Manejkom Travel & Tours</h3>
+                            <span class="badge outline">Travel Agency</span>
+                            <p class="card-description">Plan your dream vacation with us.</p>
+                            <p class="card-location"><i data-lucide="map-pin" class="icon-sm"></i> 555 Travel St, Business Center</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="button secondary full-width">Visit Page</a>
+                            <a href="map.html?location=manejkom-travel" class="button secondary full-width">View on Map</a>
                         </div>
                     </div>
                     <!-- View More Card -->
@@ -176,6 +217,16 @@
     <script src="main.js"></script>
     <script>
         lucide.createIcons();
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            
+            if (!userData.isAuthenticated) {
+                // Redirect to auth if not authenticated
+                window.location.href = 'auth.html';
+            }
+        });
     </script>
 </body>
 </html>

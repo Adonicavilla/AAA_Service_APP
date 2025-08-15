@@ -23,10 +23,7 @@
                 <a href="map.html">Map</a>
                 <a href="account.html">Account</a>
             </nav>
-            <div class="header-actions">
-                <input type="search" placeholder="Search..." class="search-input">
-                <button class="icon-button"><i data-lucide="search"></i></button>
-            </div>
+]
         </div>
     </header>
 
@@ -48,11 +45,11 @@
                         <form id="profile-form">
                             <div class="form-group">
                                 <label for="profile-name">Name</label>
-                                <input type="text" id="profile-name" class="form-input" value="John Doe" disabled>
+                                <input type="text" id="profile-name" class="form-input" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="profile-email">Email</label>
-                                <input type="email" id="profile-email" class="form-input" value="john.doe@example.com" disabled>
+                                <input type="email" id="profile-email" class="form-input" disabled>
                             </div>
                              <div class="form-actions hidden">
                                 <button type="submit" class="button primary">Save Changes</button>
@@ -73,6 +70,42 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- Settings Card -->
+                <div class="card" id="settings-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Settings</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="settings-section">
+                            <h4>Preferences</h4>
+                            <div class="setting-item">
+                                <label class="setting-label">
+                                    <input type="checkbox" id="dark-mode-toggle">
+                                    <span>Dark Mode</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="setting-label">
+                                    <input type="checkbox" id="notifications-toggle" checked>
+                                    <span>Email Notifications</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="setting-label">
+                                    <input type="checkbox" id="sms-toggle">
+                                    <span>SMS Notifications</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-section">
+                            <h4>Account Actions</h4>
+                            <button class="button secondary" id="change-password-btn">Change Password</button>
+                            <button class="button secondary" id="privacy-btn">Privacy Settings</button>
+                            <button class="button danger" id="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -86,6 +119,90 @@
     <script src="main.js"></script>
     <script>
         lucide.createIcons();
+        
+        // Load user data from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            
+            if (!userData.isAuthenticated) {
+                // Redirect to auth if not authenticated
+                window.location.href = 'auth.html';
+                return;
+            }
+            
+            // Populate profile fields
+            document.getElementById('profile-name').value = userData.fullname || 'User';
+            document.getElementById('profile-email').value = userData.email || '';
+            
+            // Update page title to include user's name
+            document.title = `${userData.fullname || 'My'} Account - AlaServeX`;
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Add event listeners for settings
+            document.getElementById('dark-mode-toggle').addEventListener('change', handleDarkModeToggle);
+            document.getElementById('notifications-toggle').addEventListener('change', handleNotificationsToggle);
+            document.getElementById('sms-toggle').addEventListener('change', handleSMSToggle);
+            document.getElementById('logout-btn').addEventListener('click', logout);
+            document.getElementById('change-password-btn').addEventListener('click', handleChangePassword);
+            document.getElementById('privacy-btn').addEventListener('click', handlePrivacySettings);
+        });
+        
+        // Handle logout
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userSettings');
+                window.location.href = 'auth.html';
+            }
+        }
+        
+        // Settings functionality
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('userSettings') || '{}');
+            
+            document.getElementById('dark-mode-toggle').checked = settings.darkMode || false;
+            document.getElementById('notifications-toggle').checked = settings.emailNotifications !== false;
+            document.getElementById('sms-toggle').checked = settings.smsNotifications || false;
+            
+            // Apply dark mode if enabled
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+        
+        function saveSettings() {
+            const settings = {
+                darkMode: document.getElementById('dark-mode-toggle').checked,
+                emailNotifications: document.getElementById('notifications-toggle').checked,
+                smsNotifications: document.getElementById('sms-toggle').checked
+            };
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        }
+        
+        function handleDarkModeToggle(e) {
+            saveSettings();
+            document.body.classList.toggle('dark-mode', e.target.checked);
+        }
+        
+        function handleNotificationsToggle(e) {
+            saveSettings();
+            console.log('Email notifications:', e.target.checked ? 'enabled' : 'disabled');
+        }
+        
+        function handleSMSToggle(e) {
+            saveSettings();
+            console.log('SMS notifications:', e.target.checked ? 'enabled' : 'disabled');
+        }
+        
+        function handleChangePassword() {
+            alert('Change password functionality will be implemented soon!');
+        }
+        
+        function handlePrivacySettings() {
+            alert('Privacy settings page will be available soon!');
+        }
     </script>
 </body>
 </html>
