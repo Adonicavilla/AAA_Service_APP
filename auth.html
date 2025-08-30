@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAA Service - Authentication</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>ServeX</h1>
+            <p class="tagline">Premium Transportation Services</p>
+        </div>
+        
+        <div class="auth-tabs">
+            <button class="tab-btn active" onclick="showTab('signin')">Sign In</button>
+            <button class="tab-btn" onclick="showTab('signup')">Sign Up</button>
+        </div>
+
+        <div class="auth-form-container">
+            <!-- Sign In Form -->
+            <form id="signin-form" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" class="form-input" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" class="form-input" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="button primary full-width">Sign In</button>
+                <p class="form-footer">
+                    <a href="#" class="button-link">Forgot password?</a>
+                </p>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="signup-fullname">Full Name</label>
+                    <input type="text" id="signup-fullname" class="form-input" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number</label>
+                    <input type="tel" id="signup-phone" class="form-input" required placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" class="form-input" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="form-input" required placeholder="Create a strong password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-user-type">I am a:</label>
+                    <select id="signup-user-type" class="form-input" required>
+                        <option value="customer">Customer</option>
+                        <option value="driver">Driver</option>
+                    </select>
+                </div>
+                <div id="driver-fields" class="driver-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="license-number">Driver's License Number</label>
+                        <input type="text" id="license-number" class="form-input" placeholder="DL123456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-type">Vehicle Type</label>
+                        <select id="vehicle-type" class="form-input">
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="van">Van</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-model">Vehicle Model</label>
+                        <input type="text" id="vehicle-model" class="form-input" placeholder="Toyota Camry 2023">
+                    </div>
+                </div>
+                <button type="submit" class="button primary full-width">Create Account</button>
+                <p class="form-footer">
+                    Already have an account? <a href="#" class="button-link" onclick="showTab('signin')">Sign In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/lucide.umd.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signinForm = document.getElementById('signin-form');
+            const signupForm = document.getElementById('signup-form');
+            const userTypeSelect = document.getElementById('signup-user-type');
+            const driverFields = document.getElementById('driver-fields');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+
+            // Function to switch between Sign In and Sign Up tabs
+            // Make it global so inline onclick can find it
+            window.showTab = function(tabName) {
+                // Switch active tab button
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                const activeBtn = Array.from(tabButtons).find(btn => btn.getAttribute('onclick') === `showTab('${tabName}')`);
+                if(activeBtn) activeBtn.classList.add('active');
+
+                // Switch active form
+                if (tabName === 'signin') {
+                    signinForm.classList.add('active');
+                    signupForm.classList.remove('active');
+                } else {
+                    signinForm.classList.remove('active');
+                    signupForm.classList.add('active');
+                }
+            }
+
+            // Show/hide driver-specific fields on user type change
+            if (userTypeSelect) {
+                userTypeSelect.addEventListener('change', () => {
+                    if (userTypeSelect.value === 'driver') {
+                        driverFields.style.display = 'block';
+                    } else {
+                        driverFields.style.display = 'none';
+                    }
+                });
+            }
+
+            // Handle Sign-in form submission
+            if (signinForm) {
+                signinForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('signin-email').value;
+                    const password = document.getElementById('signin-password').value;
+
+                    // Mock Authentication: Check if user exists in localStorage
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const user = users.find(u => u.email === email && u.password === password);
+
+                    if (user) {
+                        localStorage.setItem('userData', JSON.stringify({
+                            isAuthenticated: true,
+                            name: user.fullName,
+                            email: user.email,
+                            userType: user.userType
+                        }));
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Invalid email or password. Please sign up if you do not have an account.');
+                    }
+                });
+            }
+
+            // Handle Sign-up form submission
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const fullName = document.getElementById('signup-fullname').value;
+                    const phone = document.getElementById('signup-phone').value;
+                    const email = document.getElementById('signup-email').value;
+                    const password = document.getElementById('signup-password').value;
+                    const userType = document.getElementById('signup-user-type').value;
+
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+                    if (users.find(u => u.email === email)) {
+                        alert('An account with this email already exists. Please sign in.');
+                        return;
+                    }
+
+                    const newUser = { fullName, phone, email, password, userType };
+
+                    if (userType === 'driver') {
+                        newUser.licenseNumber = document.getElementById('license-number').value;
+                        newUser.vehicleType = document.getElementById('vehicle-type').value;
+                        newUser.vehicleModel = document.getElementById('vehicle-model').value;
+                    }
+
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    localStorage.setItem('userData', JSON.stringify({
+                        isAuthenticated: true,
+                        name: newUser.fullName,
+                        email: newUser.email,
+                        userType: newUser.userType
+                    }));
+
+                    alert('Account created successfully! Welcome.');
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

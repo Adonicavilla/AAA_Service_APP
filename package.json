@@ -1,21 +1,30 @@
 {
   "name": "ordering-system",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "AAA Service App - Ordering System with MySQL Database",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:init": "node scripts/initDatabase.js",
+    "db:test": "node scripts/testConnection.js",
+    "seed": "node scripts/seedData.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ALGGlodo/ORDERING-SYSTEM.git"
-  },
-  "keywords": [],
+  "keywords": ["ordering", "delivery", "mysql", "nodejs"],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ALGGlodo/ORDERING-SYSTEM/issues"
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "dotenv": "^16.3.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "joi": "^17.11.0"
   },
-  "homepage": "https://github.com/ALGGlodo/ORDERING-SYSTEM#readme",
-  "description": ""
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
