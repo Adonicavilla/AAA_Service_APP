@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/56c8bde467.js" crossorigin="anonymous"></script>
+    <title>Beta</title>
+</head>
+<body>
+
+<div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li><a href="index.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li><a href="order-status.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Order Status</span>
+                </a>
+            </li>
+            <li><a href="#">
+                    <i class="fas fa-map"></i>
+                    <span>Route</span>
+                </a>
+            </li>
+            <li><a href="courier-profile.html">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="logout"><a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div> 
+
+    <!--============== Main Content ==============-->
+
+    <!--============== SEARCH BOX ==============-->
+
+<section class="Main-page">
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <span>Welcome Courier! </span>
+                <h2>Dashboard</h2>
+            </div>
+            <div class="user--info">
+                <div class="search-box">
+                <i class="fa-solid fa-search">
+                    <input type="text" placeholder="Search...">
+                </i>
+                </div>
+                <img src="./Courier_1.png" alt="Courier" href="courier-profile.html">
+            </div>
+        </div>
+
+        <!--============== COURIER DASHBOARD CARDS ==============-->
+
+        <div class="courier-card-container">
+            <h1 class="main--title">Today's Orders</h1>
+            <div class="card--wrapper">
+                <div class="order-info">
+                    <div class="card--header">
+                        <div class="Total-orders">
+                            <span class="title">
+                                Delivered Orders
+                            </span>
+                            <span class="order-numbers">
+                                25
+                            </span>
+                        </div>
+                        <i class="fas fa-check icon">
+                        </i>
+                    </div>
+                </div>
+
+                <div class="order-info">
+                    <div class="card--header">
+                        <div class="Total-orders">
+                            <span class="title">
+                                Active Orders
+                            </span>
+                            <span class="order-numbers">
+                                15
+                            </span>
+                        </div>
+                        <i class="fa-solid fa-truck icon dark-green">
+                        </i>
+                    </div>
+                </div>
+
+                <div class="order-info">
+                    <div class="card--header">
+                        <div class="Total-orders">
+                            <span class="title">
+                                Pending Orders
+                            </span>
+                            <span class="order-numbers">
+                                10
+                            </span>
+                        </div>
+                        <i class="fas fa-list-check icon dark-yellow">
+                        </i>
+                    </div>
+                </div>
+
+                <div class="order-info">
+                    <div class="card--header">
+                        <div class="Total-orders">
+                            <span class="title">
+                                Cancelled Orders
+                            </span>
+                            <span class="order-numbers">
+                                5
+                            </span>
+                        </div>
+                        <i class="fas fa-ban icon dark-red">
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--============== ROWS AND COLUMNS ==============-->
+        <div class="tabular--wrapper">
+            <h3 class="main-title">Order Overview</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Restaurant</th>
+                        <th>Status</th>
+                        <th>Edit Status</th>
+                        <th>Check Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Lookback cafe</td>
+                            <td class="status out-delivery">Out for Delivery</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                            </td>
+                            <td>
+                                <button class="details">Details ></button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Sushi Central</td>
+                            <td class="status Pending">Pending</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                            </td>
+                            <td>
+                                <button class="details">Details ></button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Pizza Palace</td>
+                            <td class="status Pending">Pending</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                            </td>
+                            <td>
+                                <button class="details">Details ></button>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Jollibee</td>
+                            <td class="status Active">Active</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                            </td>
+                            <td>
+                                <button class="details">Details ></button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Pancit Kantonan</td>
+                            <td class="status Cancelled">Cancelled</td>
+                            <td>
+                                <button class="edit"></button>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>#10010</td>
+                            <td>04/27/2025</td>
+                            <td>Pancit Kantonan</td>
+                            <td class="status Cancelled">Cancelled</td>
+                            <td>
+                                <button class="edit"></button>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</section>
+   
+    <div class="modal-container">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <h2 class="modal-title">Customer and Order Details</h2>
+                <button class="close-modal"><i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            
+        <!--  ============= Order Details ============= -->
+          <div class="modal-column-left">
+            <div class="modal-content">
+                <div class="order-details">
+                    <h3>Order Details</h3>
+
+                    <div class="details-row">
+                    <p><strong>Order Status:</strong></p>
+                    <p class="status out-for-delivery">Out for Delivery</p>
+                    </div>
+
+                    <div class="details-row">
+                    <p><strong>Order ID:</strong></p>
+                    <p>#10010</p>
+                    </div>
+                    
+                    <div class="details-row">
+                    <p><strong>Order Time:</strong></p>
+                    <p>8:00 PM</p>
+                    </div>
+
+                    <div class="details-row">
+                    <p><strong>Estimated Delivery Time:</strong></p>
+                    <p>8:30 PM</p>
+                    </div>
+
+                    <div class="details-row">
+                    <p><strong>Distance:</strong></p>
+                    <p>4 km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="map-container">
+            <h4>Delivery Route</h4>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.844955591118!2d120.81126437432962!3d14.844099685665888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396539db7e51b51%3A0xdea3f2c5ab07c9fd!2sMalolos%2C%20Bulacan!5e0!3m2!1sen!2sph!4v1693622650927!5m2!1sen!2sph" 
+            allowfullscreen 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div> 
+
+                
+        <!-- ============= Order Items ============= -->
+            <div class="order-container">
+                <div class="order-items">
+                    <h2>Order Items</h2>
+
+                    <div class="order-card">
+                        <!-- Order Right -->
+                        <div class="order-left">
+                            <img src="./Courier_1.png" alt="order">
+                            <div class="product-info">
+                            <h3>Matcha Latte</h3>
+                            <p>Large</p>
+                            </div>
+                        </div>
+                        <!-- Order Left -->
+                            <div class="order-right">
+                            <p>P150.00</p>
+                            <p>Qty: 1</p>
+                            </div>
+                        </div>
+
+                    <div class="order-card">
+                        <!-- Order left -->
+                        <div class="order-left">
+                            <img src="./Courier_1.png" alt="order">   
+                            <div class="product-info">
+                                <h3>Matcha Latte</h3>
+                                <p>Large</p>
+                            </div>
+                        </div>
+                        <!-- Order right -->
+                        <div class="order-right">
+                            <p>P110.00</p>
+                            <p>Qty: 1</p>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <!-- Order Right -->
+                        <div class="order-left">
+                            <img src="./Courier_1.png" alt="order">                            
+                            <div class="product-info">
+                                <h3>Ube Taro</h3>
+                                <p>Medium</p>
+                            </div>
+                        </div>
+                        <!-- Order Left -->
+                            <div class="order-right">
+                            <p>P100.00</p>
+                            <p>Qty: 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Order Items -->
+
+        <!-- ============= Order Subtotal ============= -->
+            <div class="order-subtotal">
+                <div class="subtotal-row">
+                    <div class="sub-left">
+                        <p class="subtotal-label">Subtotal:</p>
+                    </div>
+                    <div class="sub-right">
+                        <span class="price-right">P460.00</span>
+                    </div>
+                </div>
+
+                <div class="fee-row">
+                    <div class="fee-left">
+                        <p class="fee-label">Delivery Fee:</p>
+                    </div>
+                    <div class="fee-right">
+                        <span class="price-right">P70.00</span>
+                    </div>
+                </div>
+
+            <div class="total-price">
+                <div class="total-left">
+                    <p class="total-label">Total Price:</p>
+                </div>
+                <div class="total-right">
+                    <span class="price-right">P530.00</span>
+                </div>
+            </div>
+        </div>
+     <!-- End of Order Subtotal -->
+
+            <!-- ============= Customer Details ============= -->
+  
+<div class="customer-details">
+  <h4>Customer Details</h4>
+  <div class="customer-row">
+    <span class="label">Name:</span>
+    <span class="value">Bornik Jowabol</span>
+  </div>
+
+  <div class="customer-row">
+    <span class="label">Phone:</span>
+    <span class="value">0912-821-9431</span>
+  </div>
+
+  <div class="customer-row">
+    <span class="label">Address:</span>
+    <span class="value">
+      #123 Lopez Street<br>
+      Brgy. Ng mga pogi<br>
+      Malolos, Bulacan
+    </span>
+  </div>
+
+  <div class="customer-row">
+    <span class="label">Payment Method:</span>
+    <span class="value">Cash on Delivery</span>
+  </div>
+
+  <div class="customer-row">
+    <span class="label">Status:</span>
+    <span class="value-payment"><i class="fas fa-check-square"></i> Payment Confirmed</span>
+  </div>
+</div>
+
+
+                </div>
+            </div>
+         </div> <!-- End of Modal Wrapper -->
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/56c8bde467.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li><a href="index.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li><a href="order-status.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Order Status</span>
+                </a>
+            </li>
+            <li><a href="#">
+                    <i class="fas fa-map"></i>
+                    <span>Route</span>
+                </a>
+            </li>
+            <li><a href="courier-profile.html">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="logout"><a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ============ ORDER MANAGEMENT HEADER ============ -->
+
+    <div class="om-container">
+        <header class="om-header">
+            <div class="om-header-title">
+                <div>
+                    <h1 id="orders-heading">Pending Orders</h1>
+                    <p id="orders-desc">Manage pending orders</p>
+                </div>
+            </div>
+
+            <div class="om-header-stats">
+                <span id="orders-count">6 active orders</span>
+            </div>
+        </header>
+
+        <div class="om-status-bar">
+            <div class="om-status-item">
+                <span>Preparing</span>
+                <span class="om-count">2</span>
+            </div>
+
+            <div class="om-status-item">
+                <span>Ready</span>
+                <span class="om-count">2</span>
+            </div>
+
+            <div class="om-status-item">
+                <span>Out for Delivery</span>
+                <span class="om-count">2</span>
+            </div>
+        </div>
+
+        <!-- ============ ORDER TYPE BARS ============ -->
+        <div class="om-tabs">
+            <button id="tab-pending" onclick="showOrder('pending')" class="active">Pending</button>
+            <button id="tab-active" onclick="showOrder('active')">Active</button>
+            <button id="tab-delivered" onclick="showOrder('delivered')">Delivered</button>
+            <button id="tab-cancelled" onclick="showOrder('cancelled')">Cancelled</button>
+
+        </div>
+
+
+        <!-- ============ PENDING ORDERS ============ -->
+        <div class="om-order-grid" id="pending-section">
+            <!-- ORDER CARD 1 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10010</span>
+                    <span>15 Min ago</span>
+                    <span class="om-status pending">Pending</span>
+                </div>
+
+                <div class="om-order-details">
+                    <p><strong>Bornik Jowabol</strong></p>
+                    <p>0910-555-8222</p>
+                    <p>123 Main St, Springfield, <br>Malolos, Bulacan</p>
+                    <p style="font-size: 1rem;"><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">McDonald's</p>
+                    <ul>
+                        <li>2x Burger</li>
+                        <li>1x Fries</li>
+                        <li>1x Coke</li>
+                    </ul>
+                </div>
+
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 530</span>
+                        <span class="om-eta">ETA: 10 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Ready</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 2 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10011</span>
+                    <span>10 Min ago</span>
+                    <span class="om-status pending">Pending</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Ready</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 3 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10012</span>
+                    <span>5 Min ago</span>
+                    <span class="om-status pending">Pending</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Ready</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVE ORDERS -->
+        <div class="om-order-grid" id="active-section" style="display:none;">
+            <!-- ORDER CARD 1 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10010</span>
+                    <span>15 Min ago</span>
+                    <span class="om-status active">Active</span>
+                </div>
+
+                <div class="om-order-details">
+                    <p><strong>Bornik Jowabol</strong></p>
+                    <p>0910-555-8222</p>
+                    <p>123 Main St, Springfield, <br>Malolos, Bulacan</p>
+                    <p style="font-size: 1rem;"><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">McDonald's</p>
+                    <ul>
+                        <li>2x Burger</li>
+                        <li>1x Fries</li>
+                        <li>1x Coke</li>
+                    </ul>
+                </div>
+
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 530</span>
+                        <span class="om-eta">ETA: 10 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Delivered</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+            <!-- ORDER CARD 2 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10011</span>
+                    <span>10 Min ago</span>
+                    <span class="om-status active">Active</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Delivered</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 3 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10012</span>
+                    <span>5 Min ago</span>
+                    <span class="om-status active">Active</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Mark Delivered</button>
+                    <button class="om-action-btn">Cancel Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DELIVERED ORDERS -->
+        <div class="om-order-grid" id="delivered-section" style="display:none;">
+            <!-- ORDER CARD 1 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10010</span>
+                    <span>15 Min ago</span>
+                    <span class="om-status delivered">Delivered</span>
+                </div>
+
+                <div class="om-order-details">
+                    <p><strong>Bornik Jowabol</strong></p>
+                    <p>0910-555-8222</p>
+                    <p>123 Main St, Springfield, <br>Malolos, Bulacan</p>
+                    <p style="font-size: 1rem;"><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">McDonald's</p>
+                    <ul>
+                        <li>2x Burger</li>
+                        <li>1x Fries</li>
+                        <li>1x Coke</li>
+                    </ul>
+                </div>
+
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 530</span>
+                        <span class="om-eta">ETA: 10 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+            <!-- ORDER CARD 2 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10011</span>
+                    <span>10 Min ago</span>
+                    <span class="om-status delivered">Delivered</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 3 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10012</span>
+                    <span>5 Min ago</span>
+                    <span class="om-status delivered">Delivered</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+        </div>
+
+        <!--CANCELLED ORDERS -->
+        <div class="om-order-grid" id="cancelled-section" style="display:none;">
+            <!-- ORDER CARD 1 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10010</span>
+                    <span>15 Min ago</span>
+                    <span class="om-status cancelled">Cancelled</span>
+                </div>
+
+                <div class="om-order-details">
+                    <p><strong>Bornik Jowabol</strong></p>
+                    <p>0910-555-8222</p>
+                    <p>123 Main St, Springfield, <br>Malolos, Bulacan</p>
+                    <p style="font-size: 1rem;"><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">McDonald's</p>
+                    <ul>
+                        <li>2x Burger</li>
+                        <li>1x Fries</li>
+                        <li>1x Coke</li>
+                    </ul>
+                </div>
+
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 530</span>
+                        <span class="om-eta">ETA: 10 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 2 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10011</span>
+                    <span>10 Min ago</span>
+                    <span class="om-status cancelled">Cancelled</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+
+            <!-- ORDER CARD 3 -->
+            <div class="om-order-card">
+                <div class="om-order-header">
+                    <span>#ORD-#10012</span>
+                    <span>5 Min ago</span>
+                    <span class="om-status cancelled">Cancelled</span>
+                </div>
+                <div class="om-order-details">
+                    <p><strong>Jane Doe</strong></p>
+                    <p>0910-555-1234</p>
+                    <p>456 Elm St, Springfield, <br>Malolos, Bulacan</p>
+                    <p><strong>Order Details:</strong></p>
+                    <p style="font-weight: 600;">Angel's Pizza</p>
+                    <ul>
+                        <li>1x Pizza</li>
+                        <li>2x Salad</li>
+                        <li>1x Water</li>
+                    </ul>
+                </div>
+                <div class="om-class-footer">
+                    <div class="om-row">
+                        <span class="om-price">Price: 750</span>
+                        <span class="om-eta">ETA: 5 Min</span>
+                    </div>
+                </div>
+                <div class="om-order-actions">
+                    <button class="om-action-btn primary">Return to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
