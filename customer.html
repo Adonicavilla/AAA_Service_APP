@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServeX - Customer Delivery Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="customer.css">
+    <script src="https://kit.fontawesome.com/56c8bde467.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- ================ HEADER ================ -->
+    <header class="customer-header">
+        <div class="customer-container">
+            <a href="#" class="logo">ServeX</a>
+            <nav class="main-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#">Food Delivery</a>
+                <a href="#">Directory</a>
+                <a href="#">Track Order</a>
+                <a href="#">Account</a>
+            </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Search restaurants..." class="search-input">
+                <button class="icon-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+<!-- ================ SEARCH TAB ================ -->
+    <main class="main-content">
+        <div class="dashboard-content">
+            <section class="hero">
+                <h1>We've got you covered!</h1>
+                <p>Order from your favorite restaurants and browse businesses near you in Malolos City</p>
+                <div class="hero-search">
+                    <input type="search" placeholder="Search for restaurant or businesses...">
+                    <button><i class="fas fa-search"></i>Search</button>
+                </div>
+            </section>
+        </div>
+
+<!-- ================ CUSTOMER CATEGORIES ================ -->
+<section class="customer-categories">
+    <div class="category-card">
+        <img src="images/sisig.jpg" alt="category" class="category-image">
+        <div class="category-name">Sizzling</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/milktea.jpg" alt="category" class="category-image">
+        <div class="category-name">Milktea</div>
+    </div>
+    
+    <div class="category-card">
+        <img src="images/cafe.jpg" alt="category" class="category-image">
+        <div class="category-name">Cafe</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/pares.jpg" alt="category" class="category-image">
+        <div class="category-name">Pares</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/pizza.jpg" alt="category" class="category-image">
+        <div class="category-name">Pizza</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/kakanin.jpg" alt="category" class="category-image">
+        <div class="category-name">Kakanin</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/tapsilog.jpg" alt="category" class="category-image">
+        <div class="category-name">Tapsilog</div>
+    </div>
+
+    <div class="category-card">
+        <img src="images/pancit.jpg" alt="category" class="category-image">
+        <div class="category-name">Pancit</div>
+</section>
+
+
+<!-- ================ FEATURED STORES ================ -->
+<section class="featured-stores">
+    <h2>Featured Stores</h2>
+    <div class="featured-stores-grid">
+        <div class="featured-card">
+            <img src="images/pancit.jpg" alt="featured" class="featured-image">
+            <div class="featured-content">
+            <h1 class="store-name">Pancit Cantonan Ni Juans</h1>
+            <p class="store-details"> ₱₱₱ • Pancit</p>
+            <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
+            </div>
+            <div class="featured-actions">
+                <button class="order-button">Order Now</button>
+                <button class="view-details">Details</button>
+            </div>
+        </div>
+
+        <div class="featured-card">
+            <img src="images/pares.jpg" alt="featured" class="featured-image">
+            <div class="featured-content">
+            <h1 class="store-name">Pares Ni Juan</h1>
+            <p class="store-details"> ₱₱₱ • Pares</p>
+            <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
+            </div>
+            <div class="featured-actions">
+                <button class="order-button">Order Now</button>
+                <button class="view-details">Details</button>   
+            </div>
+        </div>
+
+        <div class="featured-card">
+            <img src="images/Milktea.jpg" alt="featured" class="featured-image">
+            <div class="featured-content">
+            <h1 class="store-name">Milkteahan with kwelahan</h1>
+            <p class="store-details"> ₱₱₱ • Milktea</p>
+            <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
+            </div>
+            <div class="featured-actions">
+                <button class="order-button">Order Now</button>
+                <button class="view-details">Details</button>
+            </div>
+        </div>
+
+        <div class="featured-card">
+            <img src="images/pizza.jpg" alt="featured" class="featured-image">
+            <div class="featured-content">
+            <h1 class="store-name">Pizzarap</h1>
+            <p class="store-details"> ₱₱₱ • Pizza</p>
+            <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
+            </div>
+
+            <div class="featured-actions">
+                <button class="order-button">Order Now</button>
+                <button class="view-details">Details</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================ FEATURED BUSINESS ================ -->
+<section class="featured-business">
+    <h2>Browse nearby businesses</h2>
+    <div class="business-grid">
+        <div class="business-card">
+            <img src="images/pharmacy.jpg" alt="featured" class="featured-image">
+            <div class="business-info">
+            <h1 class="business-name">Healthy First Pharmacy</h1>
+            <p class="business-type">Pharmacy</p>
+            <p class="business-rating">★★★★★ 4.5 (20 reviews)</p>
+            <p class="business-location">123 Cat Street, Cat City</p>
+            </div>
+            <div class="business-actions">
+                <button class="view-button">View Details</button>
+            </div>
+        </div>
+
+        <div class="business-card">
+            <img src="images/pet-store.png" alt="featured" class="featured-image">
+            <div class="business-info">
+            <h1 class="business-name">Wolf & Meow Pet Store</h1>
+            <p class="business-type">Pet Store</p>
+            <p class="business-rating">★★★★★ 4.5 (20 reviews)</p>
+            <p class="business-location">123 Cat Street, Cat City</p>
+            </div>
+            <div class="business-actions">
+                <button class="view-button">View Details</button>
+            </div>
+        </div>
+        <div class="business-card">
+            <img src="images/gym.jpg" alt="featured" class="featured-image">
+            <div class="business-info">
+            <h1 class="business-name">Fitzone Gym</h1>
+            <p class="business-type">Gym</p>
+            <p class="business-rating">★★★★★ 4.5 (20 reviews)</p>
+            <p class="business-location">123 Cat Street, Cat City</p>
+            </div>
+            <div class="business-actions">
+                <button class="view-button">View Details</button>
+            </div>
+        </div>
+        <div class="business-card">
+            <img src="images/salon.jpg" alt="featured" class="featured-image">
+            <div class="business-info">
+            <h1 class="business-name">Beautify Salon</h1>
+            <p class="business-type">Beauty Salon</p>
+            <p class="business-rating">★★★★★ 4.5 (20 reviews)</p>
+            <p class="business-location">123 Cat Street, Cat City</p>
+            </div>
+            <div class="business-actions">
+                <button class="view-button">View Details</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================ FOOTER ================ -->
+<footer class="footer">
+    <div class="footer-container">
+        <p>&copy; 2025 ServeX. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
