@@ -3,353 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="customer.css">
+        <script src="https://kit.fontawesome.com/56c8bde467.js" crossorigin="anonymous"></script>
     <title>Track Your Order</title>
-    <style>
-        :root {
-            --primary-color: hsl(265, 60%, 45%);
-            --second-primary-color: rgba(113, 99, 186, 255);
-            --primary-color-dark: hsl(265, 60%, 35%);
-            --secondary-color: hsl(240, 10%, 90%);
-            --background-color: hsl(240, 10%, 97%);
-            --text-color: hsl(240, 10%, 20%);
-            --text-muted-color: hsl(240, 5%, 50%);
-            --card-bg-color: #fff;
-            --border-color: hsl(240, 10%, 85%);
-            --white-color: #fff;
-            --radius: 0.5rem;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: var(--card-bg-color);
-            padding: 24px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .order-id {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-        }
-
-        .estimated-time {
-            background: linear-gradient(135deg, var(--primary-color), var(--second-primary-color));
-            color: var(--white-color);
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: inline-block;
-            font-weight: 600;
-            margin-top: 16px;
-        }
-
-        .tracking-card {
-            background: var(--card-bg-color);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .card-subtitle {
-            color: var(--text-muted-color);
-            font-size: 14px;
-        }
-
-        .tracking-steps {
-            padding: 24px;
-        }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .step:last-child {
-            margin-bottom: 0;
-        }
-
-        .step::after {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 40px;
-            width: 2px;
-            height: calc(100% + 8px);
-            background: var(--border-color);
-        }
-
-        .step:last-child::after {
-            display: none;
-        }
-
-        .step.completed::after {
-            background: var(--primary-color);
-        }
-
-        .step-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            flex-shrink: 0;
-            border: 2px solid var(--border-color);
-            background: var(--card-bg-color);
-            z-index: 1;
-            position: relative;
-        }
-
-        .step.completed .step-icon {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-            color: var(--white-color);
-        }
-
-        .step.active .step-icon {
-            border-color: var(--primary-color);
-            background: var(--white-color);
-            color: var(--primary-color);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .step-content {
-            flex: 1;
-            padding-top: 4px;
-        }
-
-        .step-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .step.completed .step-title {
-            color: var(--primary-color);
-        }
-
-        .step-time {
-            color: var(--text-muted-color);
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .step-description {
-            color: var(--text-muted-color);
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .driver-info {
-            background: linear-gradient(135deg, var(--primary-color), var(--second-primary-color));
-            color: var(--white-color);
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .driver-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--white-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .driver-details {
-            flex: 1;
-        }
-
-        .driver-name {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .driver-rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .contact-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: var(--white-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .contact-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .order-items {
-            padding: 24px;
-        }
-
-        .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .item:last-child {
-            border-bottom: none;
-        }
-
-        .item-details {
-            flex: 1;
-        }
-
-        .item-name {
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .item-variant {
-            color: var(--text-muted-color);
-            font-size: 14px;
-        }
-
-        .item-quantity {
-            color: var(--text-muted-color);
-            margin-right: 16px;
-        }
-
-        .item-price {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .map-placeholder {
-            height: 200px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--border-color));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted-color);
-            font-size: 14px;
-            margin: 24px;
-        }
-
-        .help-section {
-            text-align: center;
-            padding: 24px;
-            background: var(--card-bg-color);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .help-btn {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .help-btn:hover {
-            background: var(--primary-color);
-            color: var(--white-color);
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 16px;
-            }
-
-            .header {
-                padding: 20px;
-            }
-
-            .order-id {
-                font-size: 20px;
-            }
-
-            .driver-info {
-                padding: 20px;
-            }
-
-            .contact-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
+<body class="track-body">
+
+<!-- ================ HEADER ================ -->
+    <header class="customer-header">
+        <div class="customer-container">
+            <a href="#" class="logo">ServeX</a>
+            <nav class="main-nav">
+                <a href="customer.html">Home</a>
+                <a href="food-delivery.html">Food Delivery</a>
+                <a href="#">Directory</a>
+                <a href="track-order.html">Track Order</a>
+                <a href="#">Account</a>
+            </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Search restaurants..." class="search-input">
+                <button class="icon-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================ TRACKING SECTION ================ -->
+    <main class="track-main">
+        <div class="track-dashboard">
+            <section class="tracking-hero">
+                <h1>Looking for your order?</h1>
+                <p>Track your order status and get real-time updates just input your order ID.</p>
+                <div class="track-hero-search">
+                    <input type="search" placeholder="Search your order ID">
+                    <button><i class="fas fa-search"></i>Search</button>
+                </div>
+            </div>
+        </main>
+
+    <div class="track-container">
         <!-- Header -->
-        <div class="header">
+        <div class="track-header">
             <div class="order-id">Order #FD2024-1127</div>
             <div class="card-subtitle">Placed on March 15, 2024 at 2:30 PM</div>
             <div class="estimated-time">⏱️ Arriving in 15-20 minutes</div>
@@ -357,8 +61,8 @@
 
         <!-- Order Tracking -->
         <div class="tracking-card">
-            <div class="card-header">
-                <div class="card-title" style="display: flex; align-items: center;">Order Status</div>
+            <div class="tracking-card-header">
+                <div class="tracking-card-title" style="display: block; align-items: center;">Order Status</div>
             </div>
             <div class="tracking-steps">
                 <div class="step completed">
@@ -414,9 +118,9 @@
 
         <!-- Order Items -->
         <div class="tracking-card">
-            <div class="card-header">
-                <div class="card-title">Your Order</div>
-                <div class="card-subtitle">Mama's Kitchen • 2.1 km away</div>
+            <div class="tracking-card-header">
+                <div class="tracking-card-title">Your Order</div>
+                <div class="tracking-card-subtitle">Mama's Kitchen • 2.1 km away</div>
             </div>
             <div class="order-items">
                 <div class="item">
@@ -453,43 +157,5 @@
                 </div>
             </div>
         </div>
-
-    <script>
-        function callDriver() {
-            alert('Calling driver... 📞');
-        }
-
-        function messageDriver() {
-            alert('Opening chat with driver... 💬');
-        }
-
-        function getHelp() {
-            alert('Opening support chat... 🆘');
-        }
-
-        // Simulate real-time updates
-        function updateOrderStatus() {
-            const steps = document.querySelectorAll('.step');
-            // This would normally connect to a real-time API
-            console.log('Checking for order updates...');
-        }
-
-        // Check for updates every 30 seconds
-        setInterval(updateOrderStatus, 30000);
-
-        // Add subtle animations on load
-        window.addEventListener('load', function() {
-            const cards = document.querySelectorAll('.tracking-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-    </script>
 </body>
 </html>
