@@ -51,7 +51,7 @@
         </div>
         
 <!-- ================ FEATURED STORES ================ -->
-<section class="featured-stores">
+<section class="featured-stores" id="featuredStores">
     <h2>Featured Stores</h2>
     <div class="featured-stores-grid">
         <div class="featured-card">
@@ -62,8 +62,7 @@
             <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
             </div>
             <div class="featured-actions">
-                <button class="order-button">Order Now</button>
-                <button class="view-details">Details</button>
+                <button class="order-button" data-store="pancit">Order Now</button>
             </div>
         </div>
 
@@ -75,8 +74,7 @@
             <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
             </div>
             <div class="featured-actions">
-                <button class="order-button">Order Now</button>
-                <button class="view-details">Details</button>   
+                <button class="order-button" data-store="pares">Order Now</button>
             </div>
         </div>
 
@@ -88,8 +86,7 @@
             <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
             </div>
             <div class="featured-actions">
-                <button class="order-button">Order Now</button>
-                <button class="view-details">Details</button>
+                <button class="order-button" data-store="milktea">Order Now</button>
             </div>
         </div>
 
@@ -100,14 +97,35 @@
             <p class="store-details"> ₱₱₱ • Pizza</p>
             <p class="store-rating">4.5 <i class="fas fa-star"></i> • 30-40 min</p>
             </div>
-
             <div class="featured-actions">
-                <button class="order-button">Order Now</button>
-                <button class="view-details">Details</button>
+                <button class="order-button" data-store="pizzarap">Order Now</button>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Store Modal -->
+<div id="store-modal" class="store-modal">
+  <div class="store-modal-content">
+    <span class="store-close-btn">&times;</span>
+
+    <!-- Banner -->
+    <img id="store-modal-banner" src="" alt="Store Banner" class="store-modal-banner">
+
+    <!-- Store Details -->
+    <div class="store-modal-details">
+      <h2 id="store-modal-name"></h2>
+      <p id="store-modal-desc"></p>
+    </div>
+
+    <!-- Menu Section -->
+    <h3 class="store-menu-title">Menu</h3>
+    <div class="store-menu-grid" id="store-menu-list">
+      <!-- JS will inject menu items here -->
+    </div>
+  </div>
+</div>
+
 
 <!-- ================ FEATURED BUSINESS ================ -->
 <section class="featured-business">
@@ -164,6 +182,28 @@
         </div>
     </div>
 </section>
+
+<!-- Floating Chat Button -->
+<div id="chatbot-button">💬</div>
+
+<!-- Chatbot Modal -->
+<div id="chatbot-modal" class="chatbot-modal">
+  <div class="chatbot-header">
+    <span>Customer Support</span>
+    <button id="chatbot-close" class="chatbot-close">✖</button>
+  </div>
+
+  <div id="chatbot-messages" class="chatbot-messages">
+    <div class="bot-message">👋 Hello! How can I assist you today?</div>
+  </div>
+
+  <div class="chatbot-input-area">
+    <input id="chatbot-input" type="text" placeholder="Type your message..." />
+    <button id="chatbot-send">Send</button>
+  </div>
+</div>
+
+
 
 <!-- ================ FOOTER ================ -->
 <footer class="footer">
