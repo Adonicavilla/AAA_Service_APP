@@ -121,6 +121,26 @@
         lucide.createIcons();
         
         // Load user data from localStorage
+        // Local announce helper for screen reader messages
+        function ensureLiveRegionLocal() {
+            let live = document.getElementById('aria-live');
+            if (!live) {
+                live = document.createElement('div');
+                live.id = 'aria-live';
+                live.setAttribute('aria-live', 'polite');
+                live.setAttribute('aria-atomic', 'true');
+                live.className = 'sr-only';
+                document.body.appendChild(live);
+            }
+            return live;
+        }
+
+        function announceLocal(message) {
+            const live = ensureLiveRegionLocal();
+            live.textContent = '';
+            setTimeout(() => { live.textContent = message; }, 50);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const userData = JSON.parse(localStorage.getItem('userData') || '{}');
             
@@ -151,11 +171,73 @@
         
         // Handle logout
         function logout() {
-            if (confirm('Are you sure you want to log out?')) {
+            // Accessible confirmation modal for logout
+            const existing = document.getElementById('logout-modal');
+            const previouslyFocused = document.activeElement;
+            if (existing) return; // already open
+
+            const modal = document.createElement('div');
+            modal.id = 'logout-modal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-labelledby', 'logout-modal-title');
+            modal.className = 'order-modal-backdrop';
+            modal.innerHTML = `
+                <div class="logout-panel">
+                    <h3 id="logout-modal-title">Confirm Logout</h3>
+                    <p id="logout-modal-desc">Are you sure you want to log out?</p>
+                    <div class="modal-actions">
+                        <button id="logout-cancel" class="button">Cancel</button>
+                        <button id="logout-confirm" class="button primary">Log Out</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            const panel = modal.querySelector('.logout-panel');
+            const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            const focusableElements = () => Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
+
+            function handleKeyDown(e) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeModal();
+                    return;
+                }
+                if (e.key === 'Tab') {
+                    const f = focusableElements();
+                    if (f.length === 0) { e.preventDefault(); return; }
+                    const first = f[0]; const last = f[f.length - 1];
+                    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                }
+            }
+
+            function closeModal() {
+                document.removeEventListener('keydown', handleKeyDown);
+                try { previouslyFocused?.focus(); } catch (err) {}
+                modal.remove();
+            }
+
+            modal.querySelector('#logout-cancel').addEventListener('click', () => {
+                announceLocal('Logout cancelled');
+                closeModal();
+            });
+
+            modal.querySelector('#logout-confirm').addEventListener('click', () => {
+                // perform logout
                 localStorage.removeItem('userData');
                 localStorage.removeItem('userSettings');
-                window.location.href = 'auth.html';
-            }
+                announceLocal('Logged out');
+                closeModal();
+                setTimeout(() => { window.location.href = 'auth.html'; }, 600);
+            });
+
+            document.addEventListener('keydown', handleKeyDown);
+
+            // focus first element
+            setTimeout(() => { const f = focusableElements(); if (f.length) f[0].focus(); }, 50);
         }
         
         // Settings functionality
@@ -197,11 +279,11 @@
         }
         
         function handleChangePassword() {
-            alert('Change password functionality will be implemented soon!');
+            announceLocal('Change password functionality will be implemented soon!');
         }
         
         function handlePrivacySettings() {
-            alert('Privacy settings page will be available soon!');
+            announceLocal('Privacy settings page will be available soon!');
         }
     </script>
 </body>

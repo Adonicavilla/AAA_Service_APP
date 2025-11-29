@@ -3,6 +3,27 @@ document.addEventListener('DOMContentLoaded', function() {
     //======== GLOBAL ===========
     lucide.createIcons();
 
+    // ARIA live region helper for screen-reader announcements
+    function ensureLiveRegion() {
+        let live = document.getElementById('aria-live');
+        if (!live) {
+            live = document.createElement('div');
+            live.id = 'aria-live';
+            live.setAttribute('aria-live', 'polite');
+            live.setAttribute('aria-atomic', 'true');
+            live.className = 'sr-only';
+            document.body.appendChild(live);
+        }
+        return live;
+    }
+
+    function announce(message) {
+        const live = ensureLiveRegion();
+        live.textContent = '';
+        // small timeout to ensure assistive tech notices changes
+        setTimeout(() => { live.textContent = message; }, 50);
+    }
+
     //======== SEARCH FUNCTIONALITY ===========
     const homePage = document.getElementById('home-page');
     if (homePage) {
@@ -172,6 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add clear button to search input
         const clearButton = document.createElement('button');
         clearButton.innerHTML = '<i data-lucide="x"></i>';
+        clearButton.setAttribute('aria-label', 'Clear search');
+        clearButton.setAttribute('type', 'button');
         clearButton.style.cssText = `
             position: absolute;
             right: 120px;
@@ -184,6 +207,13 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 0.5rem;
             display: none;
         `;
+        // Keyboard accessibility for clear button (Enter / Space)
+        clearButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.clearSearch();
+            }
+        });
 
         const searchContainer = document.querySelector('.hero-search');
         if (searchContainer) {
@@ -199,6 +229,27 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+    // ======== STATIC NAV: set aria-current on active link ========
+    function updateNavAriaCurrent() {
+        const navLinks = document.querySelectorAll('nav.main-nav a');
+        navLinks.forEach(a => {
+            try {
+                const linkUrl = new URL(a.href, window.location.href);
+                // Match by pathname or filename
+                if (linkUrl.pathname === window.location.pathname) {
+                    a.setAttribute('aria-current', 'page');
+                } else {
+                    a.removeAttribute('aria-current');
+                }
+            } catch (err) {
+                // ignore
+            }
+        });
+    }
+
+    updateNavAriaCurrent();
+    window.addEventListener('popstate', updateNavAriaCurrent);
 
     //======== AUTHENTICATION PAGE ===========
     // Check if we're on the auth page
@@ -259,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Basic validation
                 if (!email || !password) {
-                    alert('Please fill in all fields');
+                    announce('Please fill in all fields');
                     return;
                 }
                 
@@ -296,27 +347,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Validate driver fields
                     if (!driverData.licenseNumber || !driverData.vehicleType || !driverData.vehicleModel) {
-                        alert('Please fill in all driver-specific fields');
+                        announce('Please fill in all driver-specific fields');
                         return;
                     }
                 }
                 
                 // Basic validation
                 if (!fullName || !phone || !email || !password) {
-                    alert('Please fill in all required fields');
+                    announce('Please fill in all required fields');
                     return;
                 }
                 
                 // Email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
-                    alert('Please enter a valid email address');
+                    announce('Please enter a valid email address');
                     return;
                 }
                 
                 // Password validation (minimum 6 characters)
                 if (password.length < 6) {
-                    alert('Password must be at least 6 characters long');
+                    announce('Password must be at least 6 characters long');
                     return;
                 }
                 
@@ -348,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (forgotPasswordLink) {
             forgotPasswordLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                alert('Password reset functionality would be implemented here');
+                announce('Password reset functionality would be implemented here');
             });
         }
     }
@@ -499,6 +550,160 @@ document.addEventListener('DOMContentLoaded', function() {
         displayMarkers();
     }
 
+    //======== DELIVERY / ORDER FLOW ===========
+    const deliveryPage = document.getElementById('delivery-page');
+    if (deliveryPage) {
+        // Attach click handlers to order buttons
+        const orderButtons = deliveryPage.querySelectorAll('.card-footer .button, .card-footer a.button');
+        orderButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = btn.closest('.card');
+                const restaurant = card.querySelector('.card-title')?.textContent?.trim() || 'Restaurant';
+                openOrderModal(restaurant, btn);
+            });
+        });
+
+        function openOrderModal(restaurant, triggerElement) {
+            // Create modal if not present
+            let modal = document.getElementById('order-modal');
+            const previouslyFocused = triggerElement || document.activeElement;
+
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'order-modal';
+                modal.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);z-index:9999;padding:1rem;';
+                modal.setAttribute('role', 'dialog');
+                modal.setAttribute('aria-modal', 'true');
+                modal.innerHTML = `
+                    <div class="order-modal-panel" style="background:#fff;padding:1.25rem;border-radius:8px;max-width:480px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                        <h3 id="order-modal-title" style="margin:0 0 0.5rem 0;font-size:1.125rem;">Order from <span id="order-restaurant"></span></h3>
+                        <div id="order-modal-desc" style="display:none">Order form</div>
+                        <div style="margin-bottom:0.5rem;"><label for="order-name" style="display:block;font-size:0.875rem;margin-bottom:0.25rem;">Name</label><input id="order-name" style="width:100%;padding:0.5rem;border:1px solid #e5e7eb;border-radius:6px;" /></div>
+                        <div style="margin-bottom:0.5rem;"><label for="order-phone" style="display:block;font-size:0.875rem;margin-bottom:0.25rem;">Phone</label><input id="order-phone" style="width:100%;padding:0.5rem;border:1px solid #e5e7eb;border-radius:6px;" /></div>
+                        <div style="margin-bottom:0.5rem;"><label for="order-address" style="display:block;font-size:0.875rem;margin-bottom:0.25rem;">Address</label><input id="order-address" style="width:100%;padding:0.5rem;border:1px solid #e5e7eb;border-radius:6px;" /></div>
+                        <div style="margin-bottom:0.5rem;"><label for="order-notes" style="display:block;font-size:0.875rem;margin-bottom:0.25rem;">Notes</label><textarea id="order-notes" style="width:100%;padding:0.5rem;border:1px solid #e5e7eb;border-radius:6px;min-height:80px;"></textarea></div>
+                        <div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:0.75rem;">
+                            <button id="order-cancel" class="button" aria-label="Cancel order">Cancel</button>
+                            <button id="order-confirm" class="button primary" aria-label="Confirm order">Confirm Order</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Focus management and keyboard handling
+                const panel = modal.querySelector('.order-modal-panel');
+                const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                const focusableElements = () => Array.from(panel.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
+
+                function handleKeyDown(e) {
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        closeModal();
+                        return;
+                    }
+
+                    if (e.key === 'Tab') {
+                        const f = focusableElements();
+                        if (f.length === 0) {
+                            e.preventDefault();
+                            return;
+                        }
+                        const first = f[0];
+                        const last = f[f.length - 1];
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (!e.shiftKey && document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+
+                function closeModal() {
+                    document.removeEventListener('keydown', handleKeyDown);
+                    try { previouslyFocused?.focus(); } catch (err) {}
+                    modal.remove();
+                }
+
+                // Wire up modal buttons
+                modal.querySelector('#order-cancel').addEventListener('click', closeModal);
+                modal.querySelector('#order-confirm').addEventListener('click', () => {
+                    const name = modal.querySelector('#order-name').value.trim();
+                    const phone = modal.querySelector('#order-phone').value.trim();
+                    const address = modal.querySelector('#order-address').value.trim();
+                    const notes = modal.querySelector('#order-notes').value.trim();
+
+                    if (!name || !phone || !address) {
+                        announce('Please provide your name, phone and delivery address.');
+                        return;
+                    }
+
+                    const order = {
+                        id: 'ord_' + Date.now(),
+                        restaurant,
+                        name,
+                        phone,
+                        address,
+                        notes,
+                        status: 'Pending',
+                        date: new Date().toISOString()
+                    };
+
+                    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                    orders.unshift(order);
+                    localStorage.setItem('orders', JSON.stringify(orders));
+
+                    closeModal();
+                        announce('Order placed. You can view it in Account, Order History.');
+                        // Redirect to account page to view order after a short delay so screen readers can speak
+                        setTimeout(() => { window.location.href = 'account.html'; }, 700);
+                });
+
+                // Install keyboard listener
+                document.addEventListener('keydown', handleKeyDown);
+
+                // Focus the first focusable element inside the panel
+                setTimeout(() => {
+                    const f = focusableElements();
+                    if (f.length) f[0].focus();
+                }, 50);
+            }
+
+            // Prefill restaurant and user info
+            modal.querySelector('#order-restaurant').textContent = restaurant;
+            const profile = JSON.parse(localStorage.getItem('userProfile') || 'null');
+            if (profile) {
+                modal.querySelector('#order-name').value = profile.name || '';
+                modal.querySelector('#order-phone').value = profile.phone || '';
+                modal.querySelector('#order-address').value = profile.address || '';
+            } else {
+                modal.querySelector('#order-name').value = '';
+                modal.querySelector('#order-phone').value = '';
+                modal.querySelector('#order-address').value = '';
+            }
+
+            // Ensure modal is present in the DOM
+            if (!document.body.contains(modal)) document.body.appendChild(modal);
+        }
+
+        // Mobile menu toggle for static pages — keep ARIA state in sync
+        const mobileToggles = document.querySelectorAll('.mobile-menu-toggle');
+        mobileToggles.forEach(btn => {
+            const nav = btn.closest('.container')?.querySelector('.main-nav');
+            if (!nav) return;
+            if (!nav.id) nav.id = 'main-nav-static';
+            btn.setAttribute('aria-controls', nav.id);
+            btn.setAttribute('aria-expanded', 'false');
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                nav.classList.toggle('open');
+            });
+        });
+    }
+
     //======== ACCOUNT ===========
     const accountPage = document.getElementById('account-page');
     if (accountPage) {
@@ -525,19 +730,40 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const populateOrderHistory = () => {
             orderHistoryList.innerHTML = ''; // Clear list
-            if (mockOrders.length === 0) {
-                 orderHistoryList.innerHTML = '<li>No recent orders.</li>';
-                 return;
+
+            // Load stored orders (fallback to mockOrders if none exist)
+            const stored = JSON.parse(localStorage.getItem('orders') || '[]');
+            const ordersToShow = stored.length ? stored : mockOrders;
+
+            if (ordersToShow.length === 0) {
+                orderHistoryList.innerHTML = '<li>No recent orders.</li>';
+                return;
             }
-            mockOrders.forEach(order => {
+
+            ordersToShow.forEach(order => {
                 const li = document.createElement('li');
+                const title = order.title || (order.restaurant ? `${order.restaurant}` : 'Order');
+                const date = order.date ? new Date(order.date).toLocaleString() : (order.date || '');
+                const status = order.status || 'Pending';
+
                 li.innerHTML = `
                     <div class="order-item-details">
-                        <span class="order-item-title">${order.title}</span>
-                        <span class="order-item-date">${order.date}</span>
+                        <span class="order-item-title">${title}</span>
+                        <span class="order-item-date">${date}</span>
                     </div>
-                    <span class="order-item-status">${order.status}</span>
+                    <span class="order-item-status">${status}</span>
                 `;
+
+                // If there are notes or address, show them as a small detail line
+                if (order.notes || order.address) {
+                    const meta = document.createElement('div');
+                    meta.style.fontSize = '0.9rem';
+                    meta.style.color = 'var(--text-muted-color)';
+                    meta.style.marginTop = '0.5rem';
+                    meta.textContent = `${order.address ? order.address + ' · ' : ''}${order.notes ? order.notes : ''}`.trim();
+                    li.appendChild(meta);
+                }
+
                 orderHistoryList.appendChild(li);
             });
         };
@@ -570,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 email: emailInput.value,
             };
             localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
-            alert('Profile updated successfully!');
+            announce('Profile updated successfully!');
             toggleEditMode(false);
         });
 

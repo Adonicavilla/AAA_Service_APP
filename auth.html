@@ -94,6 +94,25 @@
     <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/lucide.umd.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Ensure a live region exists for screen reader announcements
+            function ensureLiveRegionLocal() {
+                let live = document.getElementById('aria-live');
+                if (!live) {
+                    live = document.createElement('div');
+                    live.id = 'aria-live';
+                    live.setAttribute('aria-live', 'polite');
+                    live.setAttribute('aria-atomic', 'true');
+                    live.className = 'sr-only';
+                    document.body.appendChild(live);
+                }
+                return live;
+            }
+
+            function announceLocal(message) {
+                const live = ensureLiveRegionLocal();
+                live.textContent = '';
+                setTimeout(() => { live.textContent = message; }, 50);
+            }
             const signinForm = document.getElementById('signin-form');
             const signupForm = document.getElementById('signup-form');
             const userTypeSelect = document.getElementById('signup-user-type');
@@ -149,7 +168,7 @@
                         }));
                         window.location.href = 'index.html';
                     } else {
-                        alert('Invalid email or password. Please sign up if you do not have an account.');
+                        announceLocal('Invalid email or password. Please sign up if you do not have an account.');
                     }
                 });
             }
@@ -167,7 +186,7 @@
                     const users = JSON.parse(localStorage.getItem('users') || '[]');
 
                     if (users.find(u => u.email === email)) {
-                        alert('An account with this email already exists. Please sign in.');
+                        announceLocal('An account with this email already exists. Please sign in.');
                         return;
                     }
 
@@ -189,8 +208,8 @@
                         userType: newUser.userType
                     }));
 
-                    alert('Account created successfully! Welcome.');
-                    window.location.href = 'index.html';
+                    announceLocal('Account created successfully! Welcome.');
+                    setTimeout(() => { window.location.href = 'index.html'; }, 700);
                 });
             }
         });

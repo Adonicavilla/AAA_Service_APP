@@ -668,3 +668,78 @@ body.auth-page {
         padding: 2rem;
     }
 }
+
+/* Accessibility: visible focus indicators */
+*:focus-visible {
+    outline: 3px solid rgba(33, 150, 243, 0.9);
+    outline-offset: 2px;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid rgba(33, 150, 243, 0.9);
+    outline-offset: 2px;
+}
+
+/* Screen-reader only helper */
+.sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    border: 0; padding: 0; margin: -1px;
+}
+
+/* Modal/backdrop common styles (used by static and React modals) */
+.modal-backdrop,
+.order-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    padding: 1rem;
+}
+
+.modal-panel,
+.logout-panel,
+.order-modal-panel {
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 8px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-panel h3,
+.logout-panel h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+}
+
+.modal-panel p,
+.logout-panel p {
+    margin: 0 0 1rem 0;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+/* Small spacing utilities */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 0.75rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 0.75rem; }
+
+/* Small utility for modal visible focus */
+.modal-panel :focus-visible,
+.logout-panel :focus-visible {
+    outline: 3px solid rgba(33,150,243,0.9);
+    outline-offset: 2px;
+}
