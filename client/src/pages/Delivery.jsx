@@ -36,6 +36,14 @@ export default function Delivery(){
       const found = RESTAURANTS.find(x => x.id === rid)
       if (found) {
         setRestaurant(found)
+        // prefill form from profile when opening via query
+        const profile = JSON.parse(localStorage.getItem('userProfile') || 'null')
+        setForm({
+          name: profile?.name || '',
+          phone: profile?.phone || '',
+          address: profile?.address || '',
+          notes: ''
+        })
         setModalOpen(true)
         // remove query to avoid re-triggering if user navigates inside app
         try {

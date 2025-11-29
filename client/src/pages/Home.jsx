@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import Modal from '../components/Modal'
 
 const RESTAURANTS = [
   { id: 'pizza-palace', name: 'Pizza Palace', eta: '25-35 min', price: '$$', rating: 4.5, location: '123 Main St, Downtown' },
@@ -18,7 +19,7 @@ export default function Home(){
     <div>
       <section className="hero">
         <div className="container">
-          <h1 className="hero-title">Welcome to AlaServeX</h1>
+          <h1 className="hero-title">Welcome to ServeX</h1>
           <p className="hero-subtitle">Your one-stop platform for food delivery, local business discovery, and more.</p>
           <div className="hero-search">
             <input type="search" placeholder="Search for services or businesses..." className="search-input large" />
@@ -45,9 +46,9 @@ export default function Home(){
                   <p className="card-location">{r.location}</p>
                 </div>
                 <div className="card-footer">
-                  <Link to={`/delivery?restaurant=${r.id}`} className="button primary full-width">Order Now</Link>
-                  <Link to={`/map?location=${r.id}`} className="button secondary full-width">View on Map</Link>
-                </div>
+                      <button className="button primary full-width" onClick={() => openModal(r)}>Order Now</button>
+                      <Link to={`/map?location=${r.id}`} className="button secondary full-width">View on Map</Link>
+                    </div>
               </div>
             ))}
 
