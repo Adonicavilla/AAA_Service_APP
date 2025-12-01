@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
 import Home from './pages/Home'
 import Delivery from './pages/Delivery'
+import Checkout from './pages/Checkout'
 import Account from './pages/Account'
 import Directory from './pages/Directory'
 import Map from './pages/Map'
@@ -46,6 +47,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/delivery" element={<Delivery />} />
+              <Route path="/checkout" element={<Checkout />} />
             <Route path="/account" element={<Account />} />
             <Route path="/directory" element={<Directory />} />
             <Route path="/map" element={<Map />} />

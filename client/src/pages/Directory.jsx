@@ -1,11 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-const BUSINESSES = [
-  { id: 'paws-claws', name: 'Paws & Claws Pet Shop', type: 'Pet Shop', desc: 'Food, toys, and accessories.', location: '321 Pet Lane' },
-  { id: 'manejkom', name: 'Manejkom Travel & Tours', type: 'Travel Agency', desc: 'Plan your dream vacation.', location: '555 Travel St' },
-  { id: 'home-fix', name: 'Home Fix It Hardware', type: 'Hardware Store', desc: 'Tools and supplies for home projects.', location: '22 Tool Ave' }
-]
+import { BUSINESSES } from '../data/menus'
 
 export default function Directory(){
   return (
@@ -24,6 +19,17 @@ export default function Directory(){
               <span className="badge outline">{b.type}</span>
               <p className="card-description">{b.desc}</p>
               <p className="card-location">{b.location}</p>
+              {b.products && (
+                <div style={{marginTop:8}}>
+                  <div style={{fontSize:'0.9rem',fontWeight:600,marginBottom:6}}>Products</div>
+                  {b.products.slice(0,3).map(p => (
+                    <div key={p.id} style={{display:'flex',justifyContent:'space-between',fontSize:'0.9rem'}}>
+                      <div>{p.name}</div>
+                      <div style={{color:'#444'}}>${p.price.toFixed(2)}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="card-footer">
               <Link to={`/map?location=${b.id}`} className="button secondary full-width">View on Map</Link>

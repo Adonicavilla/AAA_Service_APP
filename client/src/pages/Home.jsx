@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Modal from '../components/Modal'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const RESTAURANTS = [
   { id: 'pizza-palace', name: 'Pizza Palace', eta: '25-35 min', price: '$$', rating: 4.5, location: '123 Main St, Downtown' },
@@ -46,9 +45,9 @@ export default function Home(){
                   <p className="card-location">{r.location}</p>
                 </div>
                 <div className="card-footer">
-                      <button className="button primary full-width" onClick={() => openModal(r)}>Order Now</button>
-                      <Link to={`/map?location=${r.id}`} className="button secondary full-width">View on Map</Link>
-                    </div>
+                  <Link to={`/delivery?restaurant=${r.id}`} className="button primary full-width">Order Now</Link>
+                  <Link to={`/map?location=${r.id}`} className="button secondary full-width">View on Map</Link>
+                </div>
               </div>
             ))}
 
@@ -93,6 +92,7 @@ export default function Home(){
           </div>
         </div>
       </section>
+      
     </div>
   )
 }

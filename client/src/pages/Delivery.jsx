@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../components/Modal'
 import { useNavigate, useLocation } from 'react-router-dom'
-
-const RESTAURANTS = [
-  { id: 'pizza-palace', name: 'Pizza Palace', eta: '25-35 min', price: '$$', rating: 4.5 },
-  { id: 'sushi-central', name: 'Sushi Central', eta: '30-40 min', price: '$$$', rating: 4.8 },
-  { id: 'burger-barn', name: 'Burger Barn', eta: '20-30 min', price: '$', rating: 4.2 },
-  { id: 'taco-town', name: 'Taco Town', eta: '25-35 min', price: '$$', rating: 4.6 }
-]
+import { RESTAURANTS } from '../data/menus'
 
 export default function Delivery(){
   const [modalOpen, setModalOpen] = useState(false)
   const navigate = useNavigate()
   const [restaurant, setRestaurant] = useState(null)
-  const [form, setForm] = useState({ name: '', phone: '', address: '', notes: '' })
+  const [selectedItems, setSelectedItems] = useState({})
 
   function openModal(rest){
     setRestaurant(rest)
-    const profile = JSON.parse(localStorage.getItem('userProfile') || 'null')
-    setForm({
-      name: profile?.name || '',
-      phone: profile?.phone || '',
-      address: profile?.address || '',
-      notes: ''
-    })
+    // reset selected items when opening
+    // reset selected items when opening
+    setSelectedItems({})
     setModalOpen(true)
   }
 
@@ -55,37 +45,43 @@ export default function Delivery(){
     }
   }, [location.search])
 
-  function handleChange(e){
-    setForm({...form, [e.target.name]: e.target.value})
+
+
+  function changeQty(itemId, delta){
+    setSelectedItems(prev => {
+      const qty = (prev[itemId] || 0) + delta
+      const next = { ...prev }
+      if(qty <= 0) delete next[itemId]
+      else next[itemId] = qty
+      return next
+    })
+  }
+
+  function selectedList(){
+    if(!restaurant?.menu) return []
+    return restaurant.menu.filter(it => selectedItems[it.id]).map(it => ({ ...it, qty: selectedItems[it.id] }))
   }
 
   function confirmOrder(){
-    if(!form.name || !form.phone || !form.address){
-      announce('Please provide your name, phone and delivery address.')
-      // focus first empty field
-      if (!form.name) document.getElementsByName('name')[0]?.focus()
-      else if (!form.phone) document.getElementsByName('phone')[0]?.focus()
-      else if (!form.address) document.getElementsByName('address')[0]?.focus()
+    const items = selectedList()
+    if(items.length === 0){
+      announce('Please select at least one item from the menu before proceeding to checkout.')
       return
     }
 
-    const order = {
-      id: 'ord_' + Date.now(),
-      restaurant: restaurant.name,
-      name: form.name,
-      phone: form.phone,
-      address: form.address,
-      notes: form.notes,
-      status: 'Pending',
-      date: new Date().toISOString()
-    }
+    const subtotal = Number(items.reduce((s, it) => s + (it.price * it.qty), 0).toFixed(2))
 
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]')
-    orders.unshift(order)
-    localStorage.setItem('orders', JSON.stringify(orders))
-      setModalOpen(false)
-      announce('Order placed. You can view it in Account Order History.')
-      setTimeout(() => navigate('/account'), 700)
+    // save a draft cart to localStorage and navigate to checkout
+    const cartDraft = {
+      restaurantId: restaurant.id,
+      restaurantName: restaurant.name,
+      items: items,
+      subtotal
+    }
+    localStorage.setItem('cartDraft', JSON.stringify(cartDraft))
+    setModalOpen(false)
+    announce('Proceeding to checkout. Fill delivery details to complete your order.')
+    setTimeout(() => navigate('/checkout'), 300)
   }
 
     function announce(message) {
@@ -124,6 +120,45 @@ export default function Delivery(){
 
       {modalOpen && (
         <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={`Order from ${restaurant?.name}`} description={`Order form dialog for ${restaurant?.name}`}>
+          {restaurant?.menu && (
+            <div style={{marginBottom:12}}>
+              <h4 style={{margin:0,marginBottom:8}}>Menu</h4>
+              {restaurant.menu.map(it => (
+                <div key={it.id} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'6px 0'}}>
+                  <div>
+                    <div style={{fontWeight:600}}>{it.name}</div>
+                    <div style={{fontSize:'0.85rem',color:'#666'}}>${it.price.toFixed(2)}</div>
+                  </div>
+                  <div style={{display:'flex',gap:8,alignItems:'center'}}>
+                    <button className="button" onClick={() => changeQty(it.id, -1)} aria-label={`Decrease ${it.name}`}>−</button>
+                    <div style={{minWidth:24,textAlign:'center'}}>{selectedItems[it.id] || 0}</div>
+                    <button className="button" onClick={() => changeQty(it.id, 1)} aria-label={`Increase ${it.name}`}>+</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Selected items preview and subtotal */}
+          <div style={{marginBottom:12}}>
+            <h4 style={{margin:0,marginBottom:8}}>Your Selection</h4>
+            {selectedList().length > 0 ? (
+              <div>
+                {selectedList().map(it => (
+                  <div key={it.id} style={{display:'flex',justifyContent:'space-between',padding:'4px 0'}}>
+                    <div style={{color:'#222'}}>{it.name} × {it.qty}</div>
+                    <div style={{color:'#222'}}>${(it.price * it.qty).toFixed(2)}</div>
+                  </div>
+                ))}
+                <div style={{display:'flex',justifyContent:'space-between',borderTop:'1px solid #eee',paddingTop:8,marginTop:8,fontWeight:700}}>
+                  <div>Subtotal</div>
+                  <div>${selectedList().reduce((s, it) => s + (it.price * it.qty), 0).toFixed(2)}</div>
+                </div>
+              </div>
+            ) : (
+              <div style={{color:'#666'}}>No items selected yet. Use the menu above to add items.</div>
+            )}
+          </div>
           <div style={{marginBottom:8}}>
             <label htmlFor="order-name" style={{display:'block',fontSize:'0.875rem',marginBottom:4}}>Name</label>
             <input id="order-name" name="name" value={form.name} onChange={handleChange} className="form-input" />
