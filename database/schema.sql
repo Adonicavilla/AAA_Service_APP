@@ -85,10 +85,30 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (delivery_address_id) REFERENCES user_addresses(id) ON DELETE SET NULL
 );
 
+-- Menu items table for restaurant menus
+CREATE TABLE IF NOT EXISTS menu_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image_url VARCHAR(500),
+    is_available BOOLEAN DEFAULT TRUE,
+    preparation_time INT DEFAULT 15,
+    calories INT,
+    is_vegetarian BOOLEAN DEFAULT FALSE,
+    is_spicy BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
+);
+
 -- Order items table
 CREATE TABLE IF NOT EXISTS order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
+    menu_item_id INT,
     item_name VARCHAR(255) NOT NULL,
     item_description TEXT,
     quantity INT NOT NULL DEFAULT 1,
@@ -96,7 +116,8 @@ CREATE TABLE IF NOT EXISTS order_items (
     subtotal DECIMAL(10, 2) NOT NULL,
     special_requests TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (menu_item_id) REFERENCES menu_items(id) ON DELETE SET NULL
 );
 
 -- Indexes for better performance
@@ -107,6 +128,9 @@ CREATE INDEX idx_orders_restaurant_id ON orders(restaurant_id);
 CREATE INDEX idx_order_items_order_id ON order_items(order_id);
 CREATE INDEX idx_user_addresses_user_id ON user_addresses(user_id);
 CREATE INDEX idx_drivers_user_id ON drivers(user_id);
+CREATE INDEX idx_menu_items_restaurant_id ON menu_items(restaurant_id);
+CREATE INDEX idx_menu_items_category ON menu_items(category);
+CREATE INDEX idx_menu_items_available ON menu_items(is_available);
 
 -- Create a function to generate order numbers
 DELIMITER $$
